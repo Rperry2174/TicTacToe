@@ -7,30 +7,45 @@ import {
   View,
 } from 'react-native'
 
-export default class GameModeSelection extends Component {
+import { connect } from 'react-redux';
+import { changeGameMode } from '../actions/game'; //Do something here
+import { bindActionCreators } from 'redux';
+
+class GameModeSelection extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      gameMode: '1 player',
-    };
+
+    this.buttonOptions = ['1 Player', '2 Player', 'Network'];
   }
 
-  onChangeText = () => {
+  _onButtonPress = (buttonIndex) => {
+    console.log(buttonIndex + ' Simple Button pressed')
+    this.props.actions.changeGameMode(buttonIndex);
+  }
 
+  createButtons = () => {
+    const buttons = this.buttonOptions.map((buttonText, i) => {
+      return (
+        <View
+          key={i}
+          style={this.props.game.mode == i ? styles.active : styles.notActive}
+        >
+          <Button
+            title={buttonText}
+            onPress={() => this._onButtonPress(i)}
+          />
+        </View>
+      )
+    })
+
+    return(buttons)
   }
 
   render() {
     return (
       <View style={styles.horizontal}>
-        <Button
-          title="1 Player"
-          onPress={() => console.log('1Simple Button pressed')}
-        />
-        <Button
-          title="2 Player"
-          onPress={() => console.log('2Simple Button pressed')}
-        />
+        { this.createButtons() }
       </View>
     )
   }
@@ -41,5 +56,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 10
+  },
+  active: {
+    backgroundColor: '#00ff00'
+  },
+  notActive: {
+
   }
 })
+
+const mapStateToProps = state => ({
+  ...state,
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({changeGameMode}, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameModeSelection)

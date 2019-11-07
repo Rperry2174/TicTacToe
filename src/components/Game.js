@@ -19,7 +19,7 @@ class Game extends Component {
   }
 
   drawBoard = () => {
-    const rows = this.props.board.map((colData, i) => {
+    const rows = this.props.board.matrix.map((colData, i) => {
       return (
         <Row
           rowIndex={i}
@@ -61,17 +61,12 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = state => (
-  state.board
-);
-
-const ActionCreators = Object.assign(
-  {},
-  changeBoard,
-);
+const mapStateToProps = state => ({
+  ...state,
+});
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(ActionCreators, dispatch),
+  actions: bindActionCreators({}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game)

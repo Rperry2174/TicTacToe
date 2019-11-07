@@ -27,15 +27,13 @@ import {
 import Title from './src/components/Title'
 import Game from './src/components/Game'
 
-// import Title from './src/components/title.js'
-
 const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <View style={styles.sectionContainer}>
-          <Game></Game>
+          <Title></Title>
         </View>
       </SafeAreaView>
     </>

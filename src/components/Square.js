@@ -19,23 +19,34 @@ class Square extends Component {
 
     this.rowIndex = this.props.rowIndex;
     this.colIndex = this.props.colIndex;
-    this.colorValue = this.props.colorValue;
   }
 
   numberToColor = () => {
-    if (this.colorValue == 0) {
+    if (this.props.colorValue == 0) {
       return "white";
-    } else if (this.colorValue == 1) {
+    } else if (this.props.colorValue == 1) {
       return "red"
-    } else if (this.colorValue == 2) {
+    } else if (this.props.colorValue == 2) {
       return "green"
     } else {
       // Error handling
     }
   }
 
+  updateColorValue = () => {
+
+  }
+
   _onPressSquare = () => {
-    console.log("my props: " + this.rowIndex + "," + this.colIndex);
+    console.log("my props: " + this.rowIndex + "," + this.colIndex + "," + this.props.colorValue);
+    let newBoard = [
+      [2, 0, 2],
+      [2, 2, 2],
+      [2, 0, 0],
+    ]
+    console.log("this.props.acitons: ", this.props.actions)
+
+    this.props.actions.changeBoard(newBoard);
   }
 
   render() {
@@ -71,17 +82,12 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = state => (
-  state.board
-);
-
-const ActionCreators = Object.assign(
-  {},
-  changeBoard,
-);
+const mapStateToProps = state => ({
+  ...state,
+});
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(ActionCreators, dispatch),
+  actions: bindActionCreators({changeBoard}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Square)

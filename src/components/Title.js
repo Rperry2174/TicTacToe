@@ -9,7 +9,11 @@ import {
 
 import GameModeSelection from './GameModeSelection'
 
-export default class Title extends Component {
+import { connect } from 'react-redux';
+import { } from '../actions/game'; //Do something here
+import { bindActionCreators } from 'redux';
+
+class Title extends Component {
 
   constructor(props) {
     super(props);
@@ -50,8 +54,13 @@ export default class Title extends Component {
         <TextInput
           style={styles.inputBox}
           onChangeText={ text => this.onChangeText('playerName', text) }
-          value={this.state.playerName}
+          value={ this.props.game.players[0] }
         />
+
+        <Text
+          style={styles.inputLabel}>
+          { `Mode: ${this.props.game.mode}` }
+        </Text>
       </View>
     )
   }
@@ -79,3 +88,13 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
 })
+
+const mapStateToProps = state => ({
+  ...state,
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({}, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Title)

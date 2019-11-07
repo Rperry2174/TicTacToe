@@ -1,6 +1,6 @@
 import { BOARD_CHANGE } from '../constants';
 const initialState = {
-  board: [
+  matrix: [
     [0, 0, 0],
     [0, 1, 1],
     [2, 0, 0],
@@ -12,7 +12,7 @@ const boardReducer = (state = initialState, action) => {
     case BOARD_CHANGE:
       return {
         ...state,
-        board:action.payload
+        matrix: action.payload
       };
     default:
       return state;

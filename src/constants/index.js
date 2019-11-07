@@ -1,1 +1,11 @@
 export const BOARD_CHANGE = 'BOARD_CHANGE'
+
+export const GAME_MODE_CHANGE = 'GAME_MODE_CHANGE'
+
+export const GAME_HAS_STARTED_CHANGE = 'GAME_HAS_STARTED_CHANGE'
+
+export const ADD_PLAYER = 'ADD_PLAYER'
+
+export const EDIT_PLAYER = 'EDIT_PLAYER'
+
+export const NEW_TURN = 'NEW_TURN'
