@@ -6,24 +6,20 @@ import {
   TextInput,
   View,
 } from 'react-native'
+import { connect } from 'react-redux';
+import { changeBoard } from '../actions/board';
+import { bindActionCreators } from 'redux';
 
 import Row from './Row'
 
-export default class Game extends Component {
+class Game extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      board: [
-        [1, 0, 0],
-        [0, 1, 1],
-        [1, 0, 0],
-      ]
-    };
   }
 
   drawBoard = () => {
-    const rows = this.state.board.map((colData, i) => {
+    const rows = this.props.board.map((colData, i) => {
       return (
         <Row
           cols={colData}
@@ -63,3 +59,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#00ff00'
   }
 })
+
+const mapStateToProps = state => (
+  state.board
+);
+
+const ActionCreators = Object.assign(
+  {},
+  changeBoard,
+);
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(ActionCreators, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game)
