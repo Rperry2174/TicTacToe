@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native'
 
@@ -33,12 +34,20 @@ class Square extends Component {
     }
   }
 
+  _onPressSquare = () => {
+    console.log("my props: " + this.rowIndex + "," + this.colIndex);
+  }
+
   render() {
     return (
-      <View
-        style={[styles.col, styles[this.numberToColor()]]}
-      >
-      </View>
+      <TouchableWithoutFeedback
+        onPress={this._onPressSquare}
+        >
+        <View
+          style={[styles.col, styles[this.numberToColor()]]}
+        >
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
