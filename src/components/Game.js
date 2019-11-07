@@ -22,6 +22,7 @@ class Game extends Component {
     const rows = this.props.board.map((colData, i) => {
       return (
         <Row
+          rowIndex={i}
           cols={colData}
           key={i}
         >

@@ -7,12 +7,15 @@ import {
   View,
 } from 'react-native'
 
-export default class Row extends Component {
+import { connect } from 'react-redux';
+import { changeBoard } from '../actions/board';
+import { bindActionCreators } from 'redux';
+
+class Row extends Component {
 
   constructor(props) {
     super(props);
-    console.log("PROPSSSSS" + this.props.cols)
-    this.state = {};
+    this.rowIndex = this.props.rowIndex;
   }
 
   //Use this to draw the row based off an input
@@ -64,3 +67,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#ff0000'
   }
 })
+
+const mapStateToProps = state => (
+  state.board
+);
+
+const ActionCreators = Object.assign(
+  {},
+  changeBoard,
+);
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(ActionCreators, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Row)
