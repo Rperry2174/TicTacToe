@@ -24,10 +24,10 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Title from './components/Title'
-import Game from './components/Game'
+import Title from './src/components/Title'
+import Game from './src/components/Game'
 
-// import Title from './components/title.js'
+// import Title from './src/components/title.js'
 
 const App: () => React$Node = () => {
   return (
