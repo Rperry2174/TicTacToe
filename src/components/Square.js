@@ -11,50 +11,39 @@ import { connect } from 'react-redux';
 import { changeBoard } from '../actions/board';
 import { bindActionCreators } from 'redux';
 
-import Square from './Square'
-
-class Row extends Component {
+class Square extends Component {
 
   constructor(props) {
     super(props);
+
     this.rowIndex = this.props.rowIndex;
+    this.colIndex = this.props.colIndex;
+    this.colorValue = this.props.colorValue;
   }
 
-  drawRow = (rowArr) => {
-    const rowItems = rowArr.map((colorValue, i) => {
-      return (
-        <Square
-          style={styles.col}
-          key={i}
-          colIndex={i}
-          rowIndex={this.rowIndex}
-          colorValue={colorValue}
-        >
-        </Square>
-      )
-    })
-
-    return(
-      <View style={styles.row}>
-        { rowItems }
-      </View>
-    )
+  numberToColor = () => {
+    if (this.colorValue == 0) {
+      return "white";
+    } else if (this.colorValue == 1) {
+      return "red"
+    } else if (this.colorValue == 2) {
+      return "green"
+    } else {
+      // Error handling
+    }
   }
 
   render() {
     return (
-      <View style={[styles.container, styles.horizontal]}>
-        { this.drawRow(this.props.cols) }
+      <View
+        style={[styles.col, styles[this.numberToColor()]]}
+      >
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    width: '100%'
-  },
   col: {
     flex:1,
     borderColor: '#000000',
@@ -67,6 +56,9 @@ const styles = StyleSheet.create({
   },
   red: {
     backgroundColor: '#ff0000'
+  },
+  white: {
+    backgroundColor: '#ffffff'
   }
 })
 
@@ -83,4 +75,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Row)
+export default connect(mapStateToProps, mapDispatchToProps)(Square)
