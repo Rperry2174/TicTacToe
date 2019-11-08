@@ -1,9 +1,9 @@
 import { BOARD_CHANGE } from '../constants';
 const initialState = {
   matrix: [
-    [-1, -1, -1],
-    [-1, -1, -1],
-    [-1, -1, -1],
+    [-10, -10, -10],
+    [-10, -10, -10],
+    [-10, -10, -10],
   ]
 };
 
