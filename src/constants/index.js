@@ -11,3 +11,5 @@ export const EDIT_PLAYER = 'EDIT_PLAYER'
 export const NEW_TURN = 'NEW_TURN'
 
 export const UPDATE_WINNING_PLAYER = 'UPDATE_WINNING_PLAYER'
+
+export const RESTART_GAME = 'RESTART_GAME'

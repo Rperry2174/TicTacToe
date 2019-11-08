@@ -1,4 +1,5 @@
 import {
+  BOARD_CHANGE,
   GAME_MODE_CHANGE,
   GAME_HAS_STARTED_CHANGE,
   ADD_PLAYER,
@@ -6,6 +7,13 @@ import {
   NEW_TURN,
   UPDATE_WINNING_PLAYER,
 } from '../constants';
+
+export function changeBoard(board) {
+  return {
+    type: BOARD_CHANGE,
+    payload: board
+  }
+}
 
 export function changeGameMode(mode) {
   return {

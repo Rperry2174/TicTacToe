@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native'
 import { connect } from 'react-redux';
-import { changeBoard } from '../actions/board';
+import { changeBoard } from '../actions/game';
 import { bindActionCreators } from 'redux';
 
 import Row from './Row'
@@ -19,7 +19,7 @@ class Game extends Component {
   }
 
   drawBoard = () => {
-    const rows = this.props.board.matrix.map((colData, i) => {
+    const rows = this.props.game.matrix.map((colData, i) => {
       return (
         <Row
           rowIndex={i}

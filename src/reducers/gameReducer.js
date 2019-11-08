@@ -1,10 +1,12 @@
 import {
+  BOARD_CHANGE,
   GAME_MODE_CHANGE,
   GAME_HAS_STARTED_CHANGE,
   ADD_PLAYER,
   EDIT_PLAYER,
   NEW_TURN,
   UPDATE_WINNING_PLAYER,
+  RESTART_GAME
 } from '../constants';
 
 const initialState = {
@@ -12,11 +14,21 @@ const initialState = {
   winningPlayerIndex: null,
   mode: 0,
   players: ["joe", "bob"],
-  playerTurn: 1
+  playerTurn: 1,
+  matrix: [
+    [10, 10, 10],
+    [10, 10, 10],
+    [10, 10, 10],
+  ]
 };
 
 const gameReducer = (state = initialState, action) => {
   switch(action.type) {
+    case BOARD_CHANGE:
+      return {
+        ...state,
+        matrix: action.payload
+      };
     case GAME_MODE_CHANGE:
       return {
         ...state,
@@ -46,6 +58,11 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         winningPlayerIndex: action.payload
+      };
+    case RESTART_GAME:
+      return {
+        ...state,
+        winningPlayerIndex: null,
       };
 
     default:

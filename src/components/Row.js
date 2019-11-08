@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 import { connect } from 'react-redux';
-import { changeBoard } from '../actions/board';
+import { changeBoard } from '../actions/game';
 import { bindActionCreators } from 'redux';
 
 import Square from './Square'
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => (
-  state.board
+  state.game
 );
 
 const ActionCreators = Object.assign(

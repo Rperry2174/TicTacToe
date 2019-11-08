@@ -26,6 +26,7 @@ import {
 
 import Title from './src/components/Title'
 import Game from './src/components/Game'
+import GameOver from './src/components/GameOver'
 
 const App: () => React$Node = () => {
   return (

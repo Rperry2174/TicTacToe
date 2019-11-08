@@ -9,8 +9,11 @@ import {
 } from 'react-native'
 
 import { connect } from 'react-redux';
-import { changeBoard } from '../actions/board';
-import { newTurn, updateWinningPlayer } from '../actions/game';
+import {
+  newTurn,
+  updateWinningPlayer,
+  changeBoard
+} from '../actions/game';
 import { bindActionCreators } from 'redux';
 
 class Square extends Component {
@@ -37,10 +40,10 @@ class Square extends Component {
   _onPressSquare = () => {
     // Return if that square is taken
     // TODO: Add some kind of feedback (i.e. jiggle square) when clicking a taken square
-    if (this.props.colorValue != -10 || this.props.game.winningPlayerIndex) return;
+    if (this.props.colorValue != 10 || this.props.game.winningPlayerIndex) return;
 
     // NOTE: Could maybe be cleaner if switched matrix to {} instead of []
-    let oldBoard = this.props.board.matrix;
+    let oldBoard = this.props.game.matrix;
     let newBoard = Object.assign([...oldBoard], {
       [this.props.rowIndex]: Object.assign([...oldBoard[this.props.rowIndex]], {
         [this.props.colIndex]: this.props.game.playerTurn
