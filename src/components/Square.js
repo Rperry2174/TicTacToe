@@ -10,6 +10,7 @@ import {
 
 import { connect } from 'react-redux';
 import { changeBoard } from '../actions/board';
+import { newTurn } from '../actions/game';
 import { bindActionCreators } from 'redux';
 
 class Square extends Component {
@@ -22,12 +23,12 @@ class Square extends Component {
   }
 
   numberToColor = () => {
-    if (this.props.colorValue == 0) {
+    if (this.props.colorValue == -1) {
       return "white";
+    } else if (this.props.colorValue == 0) {
+      return "green"
     } else if (this.props.colorValue == 1) {
       return "red"
-    } else if (this.props.colorValue == 2) {
-      return "green"
     } else {
       // Error handling
     }
@@ -39,14 +40,20 @@ class Square extends Component {
 
   _onPressSquare = () => {
     console.log("my props: " + this.rowIndex + "," + this.colIndex + "," + this.props.colorValue);
-    let newBoard = [
-      [2, 0, 2],
-      [2, 2, 2],
-      [2, 0, 0],
-    ]
-    console.log("this.props.acitons: ", this.props.actions)
+    // Return if that square is taken
+    // TODO: Add some kind of feedback (i.e. jiggle square) when clicking a taken square
+    if (this.props.colorValue != -1) return;
+
+    // NOTE: Could maybe be cleaner if switched matrix to {} instead of []
+    let oldBoard = this.props.board.matrix;
+    let newBoard = Object.assign([...oldBoard], {
+      [this.props.rowIndex]: Object.assign([...oldBoard[this.props.rowIndex]], {
+        [this.props.colIndex]: this.props.game.playerTurn
+      })
+    })
 
     this.props.actions.changeBoard(newBoard);
+    this.props.actions.newTurn(this.props.game.playerTurn);
   }
 
   render() {
@@ -87,7 +94,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({changeBoard}, dispatch),
+  actions: bindActionCreators({changeBoard, newTurn}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Square)

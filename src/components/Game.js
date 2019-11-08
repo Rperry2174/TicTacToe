@@ -39,8 +39,13 @@ class Game extends Component {
 
   render() {
     return (
-      <View style={[styles.container, styles.horizontal]}>
-        { this.drawBoard() }
+      <View>
+        <Text>
+          Turn: {this.props.game.playerTurn}
+        </Text>
+        <View style={[styles.container, styles.horizontal]}>
+          { this.drawBoard() }
+        </View>
       </View>
     )
   }

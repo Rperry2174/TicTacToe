@@ -33,7 +33,7 @@ const App: () => React$Node = () => {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <View style={styles.sectionContainer}>
-          <Title></Title>
+          <Game></Game>
         </View>
       </SafeAreaView>
     </>

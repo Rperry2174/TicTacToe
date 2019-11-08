@@ -28,8 +28,10 @@ export function addPlayer(playerName) {
 }
 
 export function newTurn(playerIndex) {
+  // Toggle back and forth between 0 and 1
+  let newPlayerIndex = playerIndex == 0 ? 1 : 0;
   return {
     type: NEW_TURN,
-    payload: playerIndex
+    payload: newPlayerIndex
   }
 }

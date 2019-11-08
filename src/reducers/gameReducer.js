@@ -10,7 +10,7 @@ const initialState = {
   gameHasStarted: false,
   mode: 0,
   players: ["joe", "bob"],
-  playerTurn: 0,
+  playerTurn: 1,
 };
 
 const gameReducer = (state = initialState, action) => {
