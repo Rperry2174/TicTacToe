@@ -9,3 +9,5 @@ export const ADD_PLAYER = 'ADD_PLAYER'
 export const EDIT_PLAYER = 'EDIT_PLAYER'
 
 export const NEW_TURN = 'NEW_TURN'
+
+export const UPDATE_WINNING_PLAYER = 'UPDATE_WINNING_PLAYER'

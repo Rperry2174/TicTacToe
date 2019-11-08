@@ -4,13 +4,15 @@ import {
   ADD_PLAYER,
   EDIT_PLAYER,
   NEW_TURN,
+  UPDATE_WINNING_PLAYER,
 } from '../constants';
 
 const initialState = {
-  gameHasStarted: false,
+  gameStateIndex: 0,
+  winningPlayerIndex: null,
   mode: 0,
   players: ["joe", "bob"],
-  playerTurn: 1,
+  playerTurn: 1
 };
 
 const gameReducer = (state = initialState, action) => {
@@ -40,6 +42,12 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         playerTurn: action.payload
       };
+    case UPDATE_WINNING_PLAYER:
+      return {
+        ...state,
+        winningPlayerIndex: action.payload
+      };
+
     default:
       return state;
   }

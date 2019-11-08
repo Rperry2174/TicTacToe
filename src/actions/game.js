@@ -4,6 +4,7 @@ import {
   ADD_PLAYER,
   EDIT_PLAYER,
   NEW_TURN,
+  UPDATE_WINNING_PLAYER,
 } from '../constants';
 
 export function changeGameMode(mode) {
@@ -33,5 +34,70 @@ export function newTurn(playerIndex) {
   return {
     type: NEW_TURN,
     payload: newPlayerIndex
+  }
+}
+
+export function updateWinningPlayer(matrix) {
+
+  // TODO: Find a cleaner way to do this
+  // For now, if player 1 (index 0) wins then the sum of their squares will be 0
+  //          if player 2 (index 1) wins the nthe sum of their squares will be 3
+  const winningSums = [0, 3]
+
+  let rowSums = {
+    0: 0,
+    1: 0,
+    2: 0
+  }
+
+  let columnSums = {
+    0: 0,
+    1: 0,
+    2: 0
+  }
+
+  let diagonalSums = {
+    topLeftToBottomRight: 0,
+    topRightToBottomLeft: 0
+  }
+
+  for(let row = 0; row < 3; row++){
+    //check full row
+    for(let col = 0; col < 3; col++){
+      let currentVal = matrix[row][col]
+      columnSums[col] += currentVal
+      rowSums[row] += currentVal
+
+      if(row == col) {
+        diagonalSums.topLeftToBottomRight += currentVal;
+      }
+
+      if (row + col == 2) {
+        diagonalSums.topRightToBottomLeft += currentVal;
+      }
+    }
+  }
+
+  let winningPlayerValues = [];
+  [rowSums, columnSums, diagonalSums].forEach((direction) => {
+    console.log("direction: ", direction);
+    Object.values(direction).forEach((values) => {
+      winningPlayerValues.push(values)
+    })
+  })
+
+  let winningPlayerIndex = null
+  for(let i = 0; i < winningPlayerValues.length; i++) {
+    winningPlayerIndex = winningSums.indexOf(winningPlayerValues[i])
+    if(winningPlayerIndex >= 0) {
+      break;
+    } else {
+      winningPlayerIndex = null
+    }
+  }
+
+  return {
+    type: UPDATE_WINNING_PLAYER,
+    payload: winningPlayerIndex
   }
 }

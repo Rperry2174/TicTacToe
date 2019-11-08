@@ -10,7 +10,7 @@ import {
 
 import { connect } from 'react-redux';
 import { changeBoard } from '../actions/board';
-import { newTurn } from '../actions/game';
+import { newTurn, updateWinningPlayer } from '../actions/game';
 import { bindActionCreators } from 'redux';
 
 class Square extends Component {
@@ -20,11 +20,6 @@ class Square extends Component {
 
     this.rowIndex = this.props.rowIndex;
     this.colIndex = this.props.colIndex;
-
-    // TODO: Find a cleaner way to do this
-    // For now, if player 1 (index 0) wins then the sum of their squares will be 0
-    //          if player 2 (index 1) wins the nthe sum of their squares will be 3
-    this.WINNING_SUMS = [0, 3]
   }
 
   numberToColor = () => {
@@ -39,65 +34,10 @@ class Square extends Component {
     }
   }
 
-  checkForWin = (matrix) => {
-    let rowSums = {
-      0: 0,
-      1: 0,
-      2: 0
-    }
-
-    let columnSums = {
-      0: 0,
-      1: 0,
-      2: 0
-    }
-
-    let diagonalSums = {
-      topLeftToBottomRight: 0,
-      topRightToBottomLeft: 0
-    }
-
-    for(let row = 0; row < 3; row++){
-      //check full row
-      for(let col = 0; col < 3; col++){
-        let currentVal = matrix[row][col]
-        columnSums[col] += currentVal
-        rowSums[row] += currentVal
-
-        if(row == col) {
-          diagonalSums.topLeftToBottomRight += currentVal;
-        }
-
-        if (row + col == 2) {
-          diagonalSums.topRightToBottomLeft += currentVal;
-        }
-      }
-    }
-
-    let winningPlayerValues = [];
-    [rowSums, columnSums, diagonalSums].forEach((direction) => {
-      console.log("direction: ", direction);
-      Object.values(direction).forEach((values) => {
-        winningPlayerValues.push(values)
-      })
-    })
-
-    let winningPlayerIndex
-    for(let i = 0; i < winningPlayerValues.length; i++) {
-      winningPlayerIndex = this.WINNING_SUMS.indexOf(winningPlayerValues[i])
-      if(winningPlayerIndex >= 0) {
-        break;
-      }
-    }
-
-    console.log("WINNING PLAYER: ", winningPlayerIndex);
-    return winningPlayerIndex;
-  }
-
   _onPressSquare = () => {
     // Return if that square is taken
     // TODO: Add some kind of feedback (i.e. jiggle square) when clicking a taken square
-    if (this.props.colorValue != -10) return;
+    if (this.props.colorValue != -10 || this.props.game.winningPlayerIndex) return;
 
     // NOTE: Could maybe be cleaner if switched matrix to {} instead of []
     let oldBoard = this.props.board.matrix;
@@ -109,7 +49,7 @@ class Square extends Component {
 
     this.props.actions.changeBoard(newBoard);
     this.props.actions.newTurn(this.props.game.playerTurn);
-    this.checkForWin(newBoard);
+    this.props.actions.updateWinningPlayer(newBoard);
   }
 
   render() {
@@ -150,7 +90,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({changeBoard, newTurn}, dispatch),
+  actions: bindActionCreators({changeBoard, newTurn, updateWinningPlayer}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Square)
