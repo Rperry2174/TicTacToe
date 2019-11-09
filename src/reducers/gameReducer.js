@@ -14,7 +14,7 @@ const initialState = {
   winningPlayerIndex: null,
   mode: 1,
   players: ["joe", "bob"],
-  playerTurn: 1,
+  playerTurn: 0,
   matrix: [
     [10, 10, 10],
     [10, 10, 10],
@@ -63,6 +63,13 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         winningPlayerIndex: null,
+        matrix: [
+          [10, 10, 10],
+          [10, 10, 10],
+          [10, 10, 10],
+        ],
+        playerTurn: 0,
+        gameState: action.payload
       };
 
     default:

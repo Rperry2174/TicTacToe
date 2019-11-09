@@ -54,7 +54,7 @@ class Game extends Component {
 
     let gameOver = <GameOver />
     return (
-      this.props.game.winningPlayerIndex ? gameOver : gameBoard
+      this.props.game.winningPlayerIndex == null ? gameBoard : gameOver
     )
   }
 }

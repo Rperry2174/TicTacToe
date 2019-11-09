@@ -45,7 +45,6 @@ class App extends Component {
           <View style={styles.sectionContainer}>
             {this.props.game.gameState == "title" && <Title /> }
             {this.props.game.gameState == "game" && <Game /> }
-            {this.props.game.gameState == "gameOver" && <GameOver /> }
           </View>
         </SafeAreaView>
       </>

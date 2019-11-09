@@ -10,7 +10,7 @@ import {
 import GameModeSelection from './GameModeSelection'
 
 import { connect } from 'react-redux';
-import { } from '../actions/game'; //Do something here
+import { restartGame } from '../actions/game'; //Do something here
 import { bindActionCreators } from 'redux';
 
 class GameOver extends Component {
@@ -19,9 +19,14 @@ class GameOver extends Component {
     super(props);
   }
 
-  _onButtonPress = (buttonIndex) => {
-    console.log(buttonIndex + ' Simple Button pressed')
+  restartGame = () => {
+    this.props.actions.restartGame("game");
   }
+
+  goToTitle = () => {
+    this.props.actions.restartGame("title");
+  }
+
 
   render() {
     return (
@@ -29,13 +34,13 @@ class GameOver extends Component {
         <View>
           <Button
             title={"Play Again"}
-            onPress={() => this._onButtonPress(i)}
+            onPress={() => this.restartGame()}
           />
         </View>
         <View>
           <Button
             title={"Home"}
-            onPress={() => this._onButtonPress(i)}
+            onPress={() => this.goToTitle()}
           />
         </View>
       </View>
@@ -71,7 +76,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({}, dispatch),
+  actions: bindActionCreators({restartGame}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameOver)

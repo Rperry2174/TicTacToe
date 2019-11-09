@@ -2,6 +2,7 @@ import {
   BOARD_CHANGE,
   GAME_MODE_CHANGE,
   GAME_STATE_CHANGE,
+  RESTART_GAME,
   ADD_PLAYER,
   EDIT_PLAYER,
   NEW_TURN,
@@ -18,6 +19,13 @@ export function changeBoard(board) {
 export function changeGameMode(mode) {
   return {
     type: GAME_MODE_CHANGE,
+    payload: mode
+  }
+}
+
+export function restartGame(mode) {
+  return {
+    type: RESTART_GAME,
     payload: mode
   }
 }
