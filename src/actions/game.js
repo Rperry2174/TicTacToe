@@ -1,7 +1,7 @@
 import {
   BOARD_CHANGE,
   GAME_MODE_CHANGE,
-  GAME_HAS_STARTED_CHANGE,
+  GAME_STATE_CHANGE,
   ADD_PLAYER,
   EDIT_PLAYER,
   NEW_TURN,
@@ -22,10 +22,10 @@ export function changeGameMode(mode) {
   }
 }
 
-export function changeGameHasStarted(gameHasStarted) {
+export function changeGameState(gameState) {
   return {
-    type: GAME_HAS_STARTED_CHANGE,
-    payload: gameHasStarted
+    type: GAME_STATE_CHANGE,
+    payload: gameState
   }
 }
 

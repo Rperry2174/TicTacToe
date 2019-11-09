@@ -1,7 +1,7 @@
 import {
   BOARD_CHANGE,
   GAME_MODE_CHANGE,
-  GAME_HAS_STARTED_CHANGE,
+  GAME_STATE_CHANGE,
   ADD_PLAYER,
   EDIT_PLAYER,
   NEW_TURN,
@@ -10,9 +10,9 @@ import {
 } from '../constants';
 
 const initialState = {
-  gameStateIndex: 0,
+  gameState: "title",
   winningPlayerIndex: null,
-  mode: 0,
+  mode: 1,
   players: ["joe", "bob"],
   playerTurn: 1,
   matrix: [
@@ -34,10 +34,10 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         mode: action.payload
       };
-    case GAME_HAS_STARTED_CHANGE:
+    case GAME_STATE_CHANGE:
       return {
         ...state,
-        gameHasStarted: action.payload
+        gameState: action.payload
       };
     case ADD_PLAYER:
       return {

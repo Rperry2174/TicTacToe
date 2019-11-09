@@ -10,7 +10,7 @@ import {
 import GameModeSelection from './GameModeSelection'
 
 import { connect } from 'react-redux';
-import { } from '../actions/game'; //Do something here
+import { changeGameState } from '../actions/game';
 import { bindActionCreators } from 'redux';
 
 class Title extends Component {
@@ -28,6 +28,10 @@ class Title extends Component {
     this.setState({
       [key]: text
     })
+  }
+
+  _onButtonPress = () => {
+    this.props.actions.changeGameState("game")
   }
 
   render() {
@@ -61,6 +65,13 @@ class Title extends Component {
           style={styles.inputLabel}>
           { `Mode: ${this.props.game.mode}` }
         </Text>
+
+        <View>
+          <Button
+            title='Play Game'
+            onPress={() => this._onButtonPress()}
+          />
+        </View>
       </View>
     )
   }
@@ -94,7 +105,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({}, dispatch),
+  actions: bindActionCreators({changeGameState}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Title)

@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React from 'react';
+import React, { Component } from 'react'
 import {
   SafeAreaView,
   StyleSheet,
@@ -24,21 +24,33 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import Title from './src/components/Title'
 import Game from './src/components/Game'
 import GameOver from './src/components/GameOver'
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <View style={styles.sectionContainer}>
-          <Game></Game>
-        </View>
-      </SafeAreaView>
-    </>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    console.log("this.props: ", this.props.game.gameState)
+    return (
+      <>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView>
+          <View style={styles.sectionContainer}>
+            {this.props.game.gameState == "title" && <Title /> }
+            {this.props.game.gameState == "game" && <Game /> }
+            {this.props.game.gameState == "gameOver" && <GameOver /> }
+          </View>
+        </SafeAreaView>
+      </>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -80,4 +92,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+
+const mapStateToProps = state => ({
+  ...state,
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({}, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
