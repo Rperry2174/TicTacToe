@@ -11,6 +11,7 @@ import { changeBoard } from '../actions/game';
 import { bindActionCreators } from 'redux';
 
 import Row from './Row'
+import GameOver from './GameOver'
 
 class Game extends Component {
 
@@ -38,18 +39,22 @@ class Game extends Component {
   }
 
   render() {
-    return (
-      <View>
-        <Text>
-          Turn: {this.props.game.playerTurn}
-        </Text>
-        <Text>
-          Winning Player: {this.props.game.winningPlayerIndex}
-        </Text>
-        <View style={[styles.container, styles.horizontal]}>
-          { this.drawBoard() }
-        </View>
+
+    let gameBoard = <View>
+      <Text>
+        Turn: {this.props.game.playerTurn}
+      </Text>
+      <Text>
+        Winning Player: {this.props.game.winningPlayerIndex}
+      </Text>
+      <View style={[styles.container, styles.horizontal]}>
+        { this.drawBoard() }
       </View>
+    </View>
+
+    let gameOver = <GameOver />
+    return (
+      this.props.game.winningPlayerIndex ? gameOver : gameBoard
     )
   }
 }

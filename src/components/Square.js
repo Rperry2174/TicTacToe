@@ -12,7 +12,8 @@ import { connect } from 'react-redux';
 import {
   newTurn,
   updateWinningPlayer,
-  changeBoard
+  changeBoard,
+  gameOver
 } from '../actions/game';
 import { bindActionCreators } from 'redux';
 
@@ -93,7 +94,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({changeBoard, newTurn, updateWinningPlayer}, dispatch),
+  actions: bindActionCreators({
+    changeBoard,
+    newTurn,
+    updateWinningPlayer,
+    gameOver
+  }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Square)
