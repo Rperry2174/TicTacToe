@@ -29,8 +29,13 @@ class GameOver extends Component {
 
 
   render() {
+    let { winningPlayerIndex, players } = this.props.game;
+
     return (
       <View style={styles.vertical}>
+        <Text>
+        Winning Player: { players[winningPlayerIndex] }
+        </Text>
         <View>
           <Button
             title={"Play Again"}

@@ -12,8 +12,8 @@ import {
 const initialState = {
   gameState: "title",
   winningPlayerIndex: null,
+  players: ["1st player name", "2nd player name"],
   mode: 1,
-  players: ["joe", "bob"],
   playerTurn: 0,
   matrix: [
     [10, 10, 10],
