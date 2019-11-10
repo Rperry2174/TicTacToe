@@ -8,21 +8,15 @@ import {
 } from 'react-native'
 
 import GameModeSelection from './GameModeSelection'
-import NetworkInput from './NetworkInput'
-import TwoPlayerInput from './TwoPlayerInput'
 
 import { connect } from 'react-redux';
 import { changeGameState } from '../actions/game';
 import { bindActionCreators } from 'redux';
 
-class Title extends Component {
+class NetworkInput extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      roomCode: '1234',
-      playerName: 'Ryan'
-    };
   }
 
   onChangeText = (key, text) => {
@@ -37,24 +31,23 @@ class Title extends Component {
     return (
       <View style={styles.vertical}>
         <Text
-          style={styles.mainTitle}>
-          Tic Tac Toe!
+          style={styles.inputLabel}>
+          Room Code
         </Text>
-        <GameModeSelection></GameModeSelection>
-        { this.props.game.mode == 1 && <TwoPlayerInput/> }
-        { this.props.game.mode == 2 && <NetworkInput/> }
-
+        <TextInput
+          style={styles.inputBox}
+          onChangeText={ text => this.onChangeText('roomCode', text) }
+          value="1234"
+        />
         <Text
           style={styles.inputLabel}>
-          { `Mode: ${this.props.game.mode}` }
+          Name
         </Text>
-
-        <View>
-          <Button
-            title='Play Game'
-            onPress={() => this.playGameButtonPress()}
-          />
-        </View>
+        <TextInput
+          style={styles.inputBox}
+          onChangeText={ text => this.onChangeText('playerName', text) }
+          value={ this.props.game.players[0] }
+        />
       </View>
     )
   }
@@ -91,4 +84,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({changeGameState}, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Title)
+export default connect(mapStateToProps, mapDispatchToProps)(NetworkInput)

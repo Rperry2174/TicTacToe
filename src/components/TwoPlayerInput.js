@@ -8,24 +8,18 @@ import {
 } from 'react-native'
 
 import GameModeSelection from './GameModeSelection'
-import NetworkInput from './NetworkInput'
-import TwoPlayerInput from './TwoPlayerInput'
 
 import { connect } from 'react-redux';
 import { changeGameState } from '../actions/game';
 import { bindActionCreators } from 'redux';
 
-class Title extends Component {
+class TwoPlayerInput extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      roomCode: '1234',
-      playerName: 'Ryan'
-    };
   }
 
-  onChangeText = (key, text) => {
+  onChangeText = (playerIndex, text) => {
 
   }
 
@@ -33,28 +27,35 @@ class Title extends Component {
     this.props.actions.changeGameState("game")
   }
 
+  makePlayerInputBoxes = () => {
+    let  { players } = this.props.game;
+    const inputBoxes = players.map((player, i) => {
+      return (
+        <View
+          key={i}
+        >
+          <Text
+            style={styles.inputLabel}>
+            Player {i + 1}
+          </Text>
+          <TextInput
+            style={styles.inputBox}
+            onChangeText={ text => this.onChangeText(i, text) }
+            value= { players[i] }
+          />
+        </View>
+      )
+    })
+
+    return(
+      inputBoxes
+    )
+  }
+
   render() {
     return (
       <View style={styles.vertical}>
-        <Text
-          style={styles.mainTitle}>
-          Tic Tac Toe!
-        </Text>
-        <GameModeSelection></GameModeSelection>
-        { this.props.game.mode == 1 && <TwoPlayerInput/> }
-        { this.props.game.mode == 2 && <NetworkInput/> }
-
-        <Text
-          style={styles.inputLabel}>
-          { `Mode: ${this.props.game.mode}` }
-        </Text>
-
-        <View>
-          <Button
-            title='Play Game'
-            onPress={() => this.playGameButtonPress()}
-          />
-        </View>
+        { this.makePlayerInputBoxes() }
       </View>
     )
   }
@@ -91,4 +92,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({changeGameState}, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Title)
+export default connect(mapStateToProps, mapDispatchToProps)(TwoPlayerInput)
