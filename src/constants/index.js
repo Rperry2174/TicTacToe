@@ -4,8 +4,6 @@ export const GAME_MODE_CHANGE = 'GAME_MODE_CHANGE'
 
 export const GAME_STATE_CHANGE = 'GAME_STATE_CHANGE'
 
-export const ADD_PLAYER = 'ADD_PLAYER'
-
 export const EDIT_PLAYER = 'EDIT_PLAYER'
 
 export const NEW_TURN = 'NEW_TURN'

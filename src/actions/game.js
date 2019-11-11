@@ -3,7 +3,6 @@ import {
   GAME_MODE_CHANGE,
   GAME_STATE_CHANGE,
   RESTART_GAME,
-  ADD_PLAYER,
   EDIT_PLAYER,
   NEW_TURN,
   UPDATE_WINNING_PLAYER,
@@ -37,10 +36,10 @@ export function changeGameState(gameState) {
   }
 }
 
-export function addPlayer(playerName) {
+export function editPlayer(playerIndex, playerName) {
   return {
-    type: ADD_PLAYER,
-    payload: playerName
+    type: EDIT_PLAYER,
+    payload: { playerIndex: playerIndex, playerName: playerName }
   }
 }
 

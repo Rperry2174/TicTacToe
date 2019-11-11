@@ -2,7 +2,6 @@ import {
   BOARD_CHANGE,
   GAME_MODE_CHANGE,
   GAME_STATE_CHANGE,
-  ADD_PLAYER,
   EDIT_PLAYER,
   NEW_TURN,
   UPDATE_WINNING_PLAYER,
@@ -12,7 +11,7 @@ import {
 const initialState = {
   gameState: "title",
   winningPlayerIndex: null,
-  players: ["1st player name", "2nd player name"],
+  players: ["", ""],
   mode: 1,
   playerTurn: 0,
   matrix: [
@@ -39,15 +38,13 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         gameState: action.payload
       };
-    case ADD_PLAYER:
-      return {
-        ...state,
-        players: action.payload
-      };
     case EDIT_PLAYER:
+      let newPlayers = state.players;
+      newPlayers[action.payload.playerIndex] = action.payload.playerName;
+
       return {
         ...state,
-        players: action.payload
+        players: newPlayers
       };
     case NEW_TURN:
       return {

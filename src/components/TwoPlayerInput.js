@@ -10,7 +10,7 @@ import {
 import GameModeSelection from './GameModeSelection'
 
 import { connect } from 'react-redux';
-import { changeGameState } from '../actions/game';
+import { editPlayer } from '../actions/game';
 import { bindActionCreators } from 'redux';
 
 class TwoPlayerInput extends Component {
@@ -19,8 +19,8 @@ class TwoPlayerInput extends Component {
     super(props);
   }
 
-  onChangeText = (playerIndex, text) => {
-
+  onChangeText = (playerIndex, playerName) => {
+    this.props.actions.editPlayer(playerIndex, playerName);
   }
 
   playGameButtonPress = () => {
@@ -56,6 +56,12 @@ class TwoPlayerInput extends Component {
     return (
       <View style={styles.vertical}>
         { this.makePlayerInputBoxes() }
+        <Text>
+          {this.props.game.players[0]}
+        </Text>
+        <Text>
+          {this.props.game.players[1]}
+        </Text>
       </View>
     )
   }
@@ -89,7 +95,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({changeGameState}, dispatch),
+  actions: bindActionCreators({editPlayer}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TwoPlayerInput)
