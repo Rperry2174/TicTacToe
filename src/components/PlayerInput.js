@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
   vertical: {
     flexDirection: 'column',
     height:'100%',
-    backgroundColor:'purple'
   },
   positioningContainer: {
     flex: 1,

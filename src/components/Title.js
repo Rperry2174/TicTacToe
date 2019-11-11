@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   View,
+  ImageBackground,
 } from 'react-native'
 
 import GameModeSelection from './GameModeSelection'
@@ -36,21 +37,41 @@ class Title extends Component {
   render() {
     return (
       <View style={styles.vertical}>
-        <Text
-          style={styles.mainTitle}>
-          Tic Tac Toe!
-        </Text>
-        <GameModeSelection></GameModeSelection>
-        <Text
-          style={styles.inputLabel}>
-          { `Mode: ${this.props.game.mode}` }
-        </Text>
-
-        <View>
-          <Button
-            title='Play Game'
-            onPress={() => this.playGameButtonPress()}
-          />
+        <ImageBackground
+        style={[styles.backgroundImage, styles.vertical]}
+        source={require('../assets/greyBrickWall.png')}
+        >
+          <Text
+            style={styles.mainTitle}>
+            Tic Tac Toe!
+          </Text>
+          <View
+            style={styles.positioningContainer}
+          >
+            <View
+              style={styles.chalkBoardContainer}
+            >
+              <ImageBackground
+                style={styles.backgroundImage}
+                source={require('../assets/chalkboard.png')}
+              >
+                <GameModeSelection></GameModeSelection>
+                <Text
+                  style={styles.inputLabel}>
+                  { `Mode: ${this.props.game.mode}` }
+                </Text>
+              </ImageBackground>
+            </View>
+          </View>
+        </ImageBackground>
+        <View
+          style={styles.playGameContainer}
+        >
+          <ImageBackground
+            style={[styles.backgroundImage, styles.vertical]}
+            source={require('../assets/woodPanel.jpg')}
+          >
+          </ImageBackground>
         </View>
       </View>
     )
@@ -78,7 +99,30 @@ const styles = StyleSheet.create({
     fontSize: 48,
     fontWeight: '600',
     color: '#000000',
-    textAlign: 'center', // <-- the magic
+    textAlign: 'center',
+    marginTop: 30
+  },
+  backgroundImage: {
+    flex: 1,
+    flexDirection: 'column',
+    resizeMode: 'stretch',
+    width:'100%',
+    height:'100%',
+  },
+  positioningContainer: {
+    flex: 1,
+    // backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  chalkBoardContainer: {
+    width:'100%',
+    height: '70%',
+  },
+  playGameContainer: {
+    height: '15%',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 })
 
