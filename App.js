@@ -33,7 +33,7 @@ import Game from './src/components/Game'
 import GameOver from './src/components/GameOver'
 import PlayerInput from './src/components/PlayerInput'
 import Chalkboard from './src/components/Chalkboard'
-
+import WoodPanel from './src/components/WoodPanel'
 // {this.props.game.gameState == "title" && <Title /> }
 // {this.props.game.gameState == "playerInput" && <PlayerInput /> }
 // {this.props.game.gameState == "game" && <Game /> }
@@ -54,16 +54,11 @@ class App extends Component {
               <Chalkboard>
                 {this.props.game.gameState == "title" && <Title /> }
                 {this.props.game.gameState == "playerInput" && <PlayerInput /> }
+                {this.props.game.gameState == "game" && <Game /> }
               </Chalkboard>
-              <View
-                style={styles.playGameContainer}
-              >
-                <ImageBackground
-                  style={[styles.backgroundImage, styles.vertical]}
-                  source={require('./src/assets/woodPanel.jpg')}
-                >
-                </ImageBackground>
-              </View>
+              <WoodPanel>
+                <Text> asdfasdfasf </Text>
+              </WoodPanel>
             </View>
           </View>
         </SafeAreaView>
