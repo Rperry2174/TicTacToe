@@ -12,6 +12,7 @@ import GameModeSelection from './GameModeSelection'
 import { connect } from 'react-redux';
 import { editPlayer } from '../actions/game';
 import { bindActionCreators } from 'redux';
+import { PIECE_OPTIONS } from '../constants'
 
 class TwoPlayerInput extends Component {
 
@@ -36,7 +37,7 @@ class TwoPlayerInput extends Component {
         >
           <Text
             style={styles.inputLabel}>
-            Player {i + 1}
+            { PIECE_OPTIONS[i] } Player {i + 1}
           </Text>
           <TextInput
             style={styles.inputBox}

@@ -11,3 +11,7 @@ export const NEW_TURN = 'NEW_TURN'
 export const UPDATE_WINNING_PLAYER = 'UPDATE_WINNING_PLAYER'
 
 export const RESTART_GAME = 'RESTART_GAME'
+
+export const PIECE_OPTIONS = ['X', 'O']
+
+export const GAME_MODE_OPTIONS = ['One Player', 'Two Player', 'Network']

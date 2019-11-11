@@ -30,6 +30,7 @@ import { bindActionCreators } from 'redux';
 import Title from './src/components/Title'
 import Game from './src/components/Game'
 import GameOver from './src/components/GameOver'
+import PlayerInput from './src/components/PlayerInput'
 
 class App extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class App extends Component {
         <SafeAreaView>
           <View style={styles.sectionContainer}>
             {this.props.game.gameState == "title" && <Title /> }
+            {this.props.game.gameState == "playerInput" && <PlayerInput /> }
             {this.props.game.gameState == "game" && <Game /> }
           </View>
         </SafeAreaView>
