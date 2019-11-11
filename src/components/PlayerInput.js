@@ -5,6 +5,8 @@ import {
   Text,
   TextInput,
   View,
+  Image,
+  ImageBackground,
 } from 'react-native'
 
 import GameModeSelection from './GameModeSelection'
@@ -23,22 +25,62 @@ class PlayerInput extends Component {
     super(props);
   }
 
+  playGameButtonPress = () => {
+    this.props.actions.changeGameState("game")
+  }
+
+  // <ImageBackground
+  //   source={require('../assets/chalkboard.png')}
+  //   style={styles.chalkBoardContainer}
+  // >
+
   render() {
     return (
       <View style={styles.vertical}>
+      <ImageBackground
+        style={[styles.backgroundImage, styles.vertical]}
+        source={require('../assets/greyBrickWall.png')}
+      >
         <Text
           style={styles.mainTitle}>
           Tic Tac Toe!
         </Text>
         <View
-          style={styles.chalkBoard}
+          style={styles.positioningContainer}
         >
-          <Text
-            style={styles.gameModeText}>
-            { GAME_MODE_OPTIONS[this.props.game.mode] }
-          </Text>
-          { this.props.game.mode == 1 && <TwoPlayerInput/> }
-          { this.props.game.mode == 2 && <NetworkInput/> }
+          <View
+            style={styles.chalkBoardContainer}
+          >
+            <ImageBackground
+              style={styles.backgroundImage}
+              source={require('../assets/chalkboard.png')}
+            >
+              <View
+                style={{paddingHorizontal: 10, paddingTop: 50}}
+              >
+                <Text
+                  style={styles.gameModeText}>
+                  { GAME_MODE_OPTIONS[this.props.game.mode] }
+                </Text>
+                { this.props.game.mode == 1 && <TwoPlayerInput/> }
+                { this.props.game.mode == 2 && <NetworkInput/> }
+              </View>
+            </ImageBackground>
+          </View>
+        </View>
+        </ImageBackground>
+        <View
+          style={styles.playGameContainer}
+        >
+          <ImageBackground
+            style={[styles.backgroundImage, styles.vertical]}
+            source={require('../assets/woodPanel.jpg')}
+          >
+            <Button
+              title='Play Game'
+              onPress={() => this.playGameButtonPress()}
+            />
+          </ImageBackground>
         </View>
       </View>
     )
@@ -48,13 +90,30 @@ class PlayerInput extends Component {
 const styles = StyleSheet.create({
   vertical: {
     flexDirection: 'column',
-    padding: 10,
     height:'100%',
+    backgroundColor:'purple'
   },
-  chalkBoard: {
-    padding: 10,
+  positioningContainer: {
     flex: 1,
+    // backgroundColor: 'blue',
     justifyContent: 'center',
+    alignItems: 'center'
+  },
+  playGameContainer: {
+    height: '15%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  chalkBoardContainer: {
+    width:'100%',
+    height: '70%',
+  },
+  backgroundImage: {
+    flex: 1,
+    flexDirection: 'column',
+    resizeMode: 'stretch',
+    width:'100%',
+    height:'100%',
   },
   inputBox: {
      height: 40,
@@ -71,6 +130,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#000000',
     textAlign: 'center',
+    marginTop: 30
   },
   gameModeText: {
     fontSize: 40,
