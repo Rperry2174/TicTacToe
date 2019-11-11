@@ -36,43 +36,12 @@ class Title extends Component {
 
   render() {
     return (
-      <View style={styles.vertical}>
-        <ImageBackground
-        style={[styles.backgroundImage, styles.vertical]}
-        source={require('../assets/greyBrickWall.png')}
-        >
-          <Text
-            style={styles.mainTitle}>
-            Tic Tac Toe!
-          </Text>
-          <View
-            style={styles.positioningContainer}
-          >
-            <View
-              style={styles.chalkBoardContainer}
-            >
-              <ImageBackground
-                style={styles.backgroundImage}
-                source={require('../assets/chalkboard.png')}
-              >
-                <GameModeSelection></GameModeSelection>
-                <Text
-                  style={styles.inputLabel}>
-                  { `Mode: ${this.props.game.mode}` }
-                </Text>
-              </ImageBackground>
-            </View>
-          </View>
-        </ImageBackground>
-        <View
-          style={styles.playGameContainer}
-        >
-          <ImageBackground
-            style={[styles.backgroundImage, styles.vertical]}
-            source={require('../assets/woodPanel.jpg')}
-          >
-          </ImageBackground>
-        </View>
+      <View>
+        <GameModeSelection></GameModeSelection>
+        <Text
+          style={styles.inputLabel}>
+          { `Mode: ${this.props.game.mode}` }
+        </Text>
       </View>
     )
   }

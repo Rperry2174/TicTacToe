@@ -14,6 +14,7 @@ import {
   View,
   Text,
   StatusBar,
+  ImageBackground,
 } from 'react-native';
 
 import {
@@ -31,6 +32,11 @@ import Title from './src/components/Title'
 import Game from './src/components/Game'
 import GameOver from './src/components/GameOver'
 import PlayerInput from './src/components/PlayerInput'
+import Chalkboard from './src/components/Chalkboard'
+
+// {this.props.game.gameState == "title" && <Title /> }
+// {this.props.game.gameState == "playerInput" && <PlayerInput /> }
+// {this.props.game.gameState == "game" && <Game /> }
 
 class App extends Component {
   constructor(props) {
@@ -44,9 +50,21 @@ class App extends Component {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
           <View style={styles.sectionContainer}>
-            {this.props.game.gameState == "title" && <Title /> }
-            {this.props.game.gameState == "playerInput" && <PlayerInput /> }
-            {this.props.game.gameState == "game" && <Game /> }
+            <View style={styles.vertical}>
+              <Chalkboard>
+                {this.props.game.gameState == "title" && <Title /> }
+                {this.props.game.gameState == "playerInput" && <PlayerInput /> }
+              </Chalkboard>
+              <View
+                style={styles.playGameContainer}
+              >
+                <ImageBackground
+                  style={[styles.backgroundImage, styles.vertical]}
+                  source={require('./src/assets/woodPanel.jpg')}
+                >
+                </ImageBackground>
+              </View>
+            </View>
           </View>
         </SafeAreaView>
       </>
@@ -90,6 +108,39 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingRight: 12,
     textAlign: 'right',
+  },
+  vertical: {
+    flexDirection: 'column',
+    height:'100%',
+  },
+  mainTitle: {
+    fontSize: 48,
+    fontWeight: '600',
+    color: '#000000',
+    textAlign: 'center',
+    marginTop: 30
+  },
+  positioningContainer: {
+    flex: 1,
+    // backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  playGameContainer: {
+    height: '15%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  chalkBoardContainer: {
+    width:'100%',
+    height: '70%',
+  },
+  backgroundImage: {
+    flex: 1,
+    flexDirection: 'column',
+    resizeMode: 'stretch',
+    width:'100%',
+    height:'100%',
   },
 });
 

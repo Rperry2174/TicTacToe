@@ -36,61 +36,43 @@ class PlayerInput extends Component {
 
   render() {
     return (
-      <View style={styles.vertical}>
-      <ImageBackground
-        style={[styles.backgroundImage, styles.vertical]}
-        source={require('../assets/greyBrickWall.png')}
-      >
+      <View>
         <Text
-          style={styles.mainTitle}>
-          Tic Tac Toe!
+          style={styles.gameModeText}>
+          { GAME_MODE_OPTIONS[this.props.game.mode] }
         </Text>
-        <View
-          style={styles.positioningContainer}
-        >
-          <View
-            style={styles.chalkBoardContainer}
-          >
-            <ImageBackground
-              style={styles.backgroundImage}
-              source={require('../assets/chalkboard.png')}
-            >
-              <View
-                style={{paddingHorizontal: 10, paddingTop: 50}}
-              >
-                <Text
-                  style={styles.gameModeText}>
-                  { GAME_MODE_OPTIONS[this.props.game.mode] }
-                </Text>
-                { this.props.game.mode == 1 && <TwoPlayerInput/> }
-                { this.props.game.mode == 2 && <NetworkInput/> }
-              </View>
-            </ImageBackground>
-          </View>
-        </View>
-        </ImageBackground>
-        <View
-          style={styles.playGameContainer}
-        >
-          <ImageBackground
-            style={[styles.backgroundImage, styles.vertical]}
-            source={require('../assets/woodPanel.jpg')}
-          >
-            <Button
-              title='Play Game'
-              onPress={() => this.playGameButtonPress()}
-            />
-          </ImageBackground>
-        </View>
+        { this.props.game.mode == 1 && <TwoPlayerInput/> }
+        { this.props.game.mode == 2 && <NetworkInput/> }
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  inputBox: {
+     height: 40,
+     borderColor: 'gray',
+     borderWidth: 1
+  },
+  inputLabel: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#000000',
+  },
+  gameModeText: {
+    fontSize: 40,
+    textAlign: 'center', // <-- the magic
+  },
   vertical: {
     flexDirection: 'column',
     height:'100%',
+  },
+  mainTitle: {
+    fontSize: 48,
+    fontWeight: '600',
+    color: '#000000',
+    textAlign: 'center',
+    marginTop: 30
   },
   positioningContainer: {
     flex: 1,
@@ -114,27 +96,6 @@ const styles = StyleSheet.create({
     width:'100%',
     height:'100%',
   },
-  inputBox: {
-     height: 40,
-     borderColor: 'gray',
-     borderWidth: 1
-  },
-  inputLabel: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#000000',
-  },
-  mainTitle: {
-    fontSize: 48,
-    fontWeight: '600',
-    color: '#000000',
-    textAlign: 'center',
-    marginTop: 30
-  },
-  gameModeText: {
-    fontSize: 40,
-    textAlign: 'center', // <-- the magic
-  }
 })
 
 const mapStateToProps = state => ({
