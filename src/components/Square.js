@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   View,
+  Image,
 } from 'react-native'
 
 import { connect } from 'react-redux';
@@ -27,12 +28,21 @@ class Square extends Component {
   }
 
   numberToColor = () => {
-    if (this.props.colorValue == 10) {
-      return "white";
-    } else if (this.props.colorValue == 0) {
-      return "green"
+
+    let o = <Image
+      style={{width: '100%', height: '100%'}}
+      source={require('../assets/piece_O.png')}
+    />;
+
+    let x = <Image
+      style={{width: '100%', height: '100%'}}
+      source={require('../assets/piece_X.png')}
+    />
+
+    if (this.props.colorValue == 0) {
+      return x
     } else if (this.props.colorValue == 1) {
-      return "red"
+      return o
     } else {
       // Error handling
     }
@@ -62,8 +72,9 @@ class Square extends Component {
         onPress={this._onPressSquare}
         >
         <View
-          style={[styles.col, styles[this.numberToColor()]]}
+          style={styles.col}
         >
+          { this.numberToColor() }
         </View>
       </TouchableWithoutFeedback>
     )
