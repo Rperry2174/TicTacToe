@@ -61,7 +61,9 @@ const styles = StyleSheet.create({
   },
   gameModeText: {
     fontSize: 40,
-    textAlign: 'center', // <-- the magic
+    textAlign: 'center',
+    fontFamily: "squeakychalksound",
+    color: '#e6e6e6'
   },
   vertical: {
     flexDirection: 'column',

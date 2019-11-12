@@ -40,7 +40,6 @@ class Title extends Component {
         <GameModeSelection></GameModeSelection>
         <Text
           style={styles.inputLabel}>
-          { `Mode: ${this.props.game.mode}` }
         </Text>
       </View>
     )

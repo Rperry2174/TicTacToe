@@ -68,9 +68,12 @@ const styles = StyleSheet.create({
   mainTitle: {
     fontSize: 48,
     fontWeight: '600',
-    color: '#000000',
     textAlign: 'center',
-    marginTop: 30
+    marginTop: 30,
+    fontFamily: "squeakychalksound",
+    fontSize: 45,
+    color: 'yellow',
+    textShadowColor: '#7e4f09',
   },
   positioningContainer: {
     flex: 1,
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
   },
   chalkBoardContainer: {
     width:'100%',
-    height: '70%',
+    height: '72%',
   },
   backgroundImage: {
     flex: 1,

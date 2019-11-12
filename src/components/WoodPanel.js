@@ -15,7 +15,8 @@ import {
   Text,
   StatusBar,
   ImageBackground,
-  Button
+  Button,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -50,11 +51,10 @@ class WoodPanel extends Component {
                 <View
                   style={styles.pullLeft}
                 >
-                  <Text>
+                  <Text
+                    style={styles.turnText}
+                  >
                     Turn: {players[playerTurn]}
-                  </Text>
-                  <Text>
-                    Winning Player: {players[winningPlayerIndex]}
                   </Text>
                 </View>
               }
@@ -63,10 +63,16 @@ class WoodPanel extends Component {
                 <View
                   style={styles.pullRight}
                 >
-                  <Button
-                    title='Play'
-                    onPress={() => this.playGameButtonPress()}
-                  />
+                  <TouchableWithoutFeedback
+                    onPress={this.playGameButtonPress}
+                  >
+                    <Text
+                      style={styles.playButton}
+                    >
+                      PLAY
+                    </Text>
+                  </TouchableWithoutFeedback>
+
                 </View>
               }
             </View>
@@ -111,6 +117,23 @@ const styles = StyleSheet.create({
   pullLeft: {
     justifyContent: 'center',
     fontSize: 20,
+  },
+  playButton: {
+    fontFamily: "WarungKopi",
+    fontSize: 45,
+    color: '#492e06',
+    textShadowColor: '#7e4f09',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10
+  },
+  turnText: {
+    fontFamily: "WarungKopi",
+    fontSize: 45,
+    color: '#492e06',
+    textShadowColor: '#7e4f09',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+    paddingLeft: 10
   }
 });
 

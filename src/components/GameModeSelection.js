@@ -31,13 +31,12 @@ class GameModeSelection extends Component {
       return (
         <View
           key={i}
-          style={[this.props.game.mode == i ? styles.active : styles.notActive, styles.button]}
         >
           <TouchableOpacity
             onPress={() => this._onButtonPress(i)}
           >
             <Text
-              style={styles.buttonText}
+              style={[this.props.game.mode == i ? styles.active : styles.notActive, styles.buttonText]}
             >
               {buttonText}
             </Text>
@@ -65,7 +64,10 @@ const styles = StyleSheet.create({
     padding: 10
   },
   active: {
-    backgroundColor: '#00ff00'
+    color: 'yellow'
+  },
+  notActive: {
+    color: 'white'
   },
   button: {
     marginTop: 10,
@@ -74,7 +76,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 40,
-    textAlign: 'center', // <-- the magic
+    textAlign: 'center',
+    fontFamily: "squeakychalksound",
   }
 })
 

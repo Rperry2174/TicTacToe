@@ -30,13 +30,18 @@ class TwoPlayerInput extends Component {
 
   makePlayerInputBoxes = () => {
     let  { players } = this.props.game;
+    let xColor = "#00ef05";
+    let oColor = "#ed0303";
+    let colors = [xColor, oColor];
+
     const inputBoxes = players.map((player, i) => {
+
       return (
         <View
           key={i}
         >
           <Text
-            style={styles.inputLabel}>
+            style={[styles.inputLabel, {color: colors[i]}]}>
             { PIECE_OPTIONS[i] } Player {i + 1}
           </Text>
           <TextInput
@@ -77,12 +82,16 @@ const styles = StyleSheet.create({
   inputBox: {
      height: 40,
      borderColor: 'gray',
-     borderWidth: 1
+     borderWidth: 1,
+     fontFamily: "squeakychalksound",
+     color: '#ffffff',
+     fontSize: 24,
+     paddingLeft: 10
   },
   inputLabel: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#000000',
+    fontFamily: "squeakychalksound"
   },
   mainTitle: {
     fontSize: 48,
