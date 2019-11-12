@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   chalkBoardContainer: {
     width:'100%',
-    height: '72%',
+    height: '74%',
   },
   backgroundImage: {
     flex: 1,
