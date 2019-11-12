@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   View,
+  TouchableWithoutFeedback,
 } from 'react-native'
 
 import GameModeSelection from './GameModeSelection'
@@ -33,20 +34,37 @@ class GameOver extends Component {
 
     return (
       <View style={styles.vertical}>
-        <Text>
-        Winning Player: { players[winningPlayerIndex] }
+        <Text
+          style={styles.winnerText}
+        >
+          Winning Player:
         </Text>
-        <View>
-          <Button
-            title={"Play Again"}
-            onPress={() => this.restartGame()}
-          />
-        </View>
-        <View>
-          <Button
-            title={"Home"}
-            onPress={() => this.goToTitle()}
-          />
+        <Text
+          style={styles.winnerName}
+        >
+          { players[winningPlayerIndex] }
+        </Text>
+        <View
+          style={styles.restartOptions}
+        >
+          <TouchableWithoutFeedback
+            onPress={this.restartGame}
+          >
+            <Text
+              style={styles.playButton}
+            >
+              Play Again
+            </Text>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onPress={this.goToTitle}
+          >
+            <Text
+              style={styles.playButton}
+            >
+              Home
+            </Text>
+          </TouchableWithoutFeedback>
         </View>
       </View>
     )
@@ -74,6 +92,30 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#000000',
   },
+  winnerText: {
+    fontSize: 35,
+    textAlign: 'center',
+    fontFamily: "squeakychalksound",
+    color: '#e6e6e6'
+  },
+  winnerName: {
+    fontSize: 35,
+    textAlign: 'center',
+    fontFamily: "squeakychalksound",
+    color: 'yellow'
+  },
+  playButton: {
+    fontFamily: "squeakychalksound",
+    fontSize: 25,
+    color: '#ffffff',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10
+  },
+  restartOptions: {
+    paddingTop: 40,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 })
 
 const mapStateToProps = state => ({

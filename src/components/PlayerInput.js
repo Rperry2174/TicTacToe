@@ -29,11 +29,6 @@ class PlayerInput extends Component {
     this.props.actions.changeGameState("game")
   }
 
-  // <ImageBackground
-  //   source={require('../assets/chalkboard.png')}
-  //   style={styles.chalkBoardContainer}
-  // >
-
   render() {
     return (
       <View>

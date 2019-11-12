@@ -48,6 +48,7 @@ class WoodPanel extends Component {
             <View style={styles.horizontal}>
               {
                 this.props.game.gameState == "game" &&
+                this.props.game.winningPlayerIndex == null &&
                 <View
                   style={styles.pullLeft}
                 >
