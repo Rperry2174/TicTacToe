@@ -39,17 +39,8 @@ class Game extends Component {
   }
 
   render() {
-
-    let { playerTurn, players } = this.props.game;
-
     let gameBoard = <View>
-      <Text>
-        Turn: {players[playerTurn]}
-      </Text>
-      <Text>
-        Winning Player: {this.props.game.winningPlayerIndex}
-      </Text>
-      <View style={[styles.container, styles.horizontal]}>
+      <View style={styles.container}>
         { this.drawBoard() }
       </View>
     </View>

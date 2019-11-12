@@ -43,7 +43,7 @@ class Row extends Component {
 
   render() {
     return (
-      <View style={[styles.container, styles.horizontal]}>
+      <View style={styles.container}>
         { this.drawRow(this.props.cols) }
       </View>
     )

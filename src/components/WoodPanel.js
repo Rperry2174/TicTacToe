@@ -33,6 +33,8 @@ class WoodPanel extends Component {
   }
 
   render() {
+    let { playerTurn, players, winningPlayerIndex } = this.props.game;
+
     return (
       <>
         <View
@@ -42,12 +44,32 @@ class WoodPanel extends Component {
             style={[styles.backgroundImage, styles.vertical]}
             source={require('../assets/woodPanel.jpg')}
           >
-            { this.props.game.gameState == "playerInput" &&
-                <Button
-                  title='Play Game'
-                  onPress={() => this.playGameButtonPress()}
-                />
-            }
+            <View style={styles.horizontal}>
+              {
+                this.props.game.gameState == "game" &&
+                <View
+                  style={styles.pullLeft}
+                >
+                  <Text>
+                    Turn: {players[playerTurn]}
+                  </Text>
+                  <Text>
+                    Winning Player: {players[winningPlayerIndex]}
+                  </Text>
+                </View>
+              }
+              {
+                this.props.game.gameState == "playerInput" &&
+                <View
+                  style={styles.pullRight}
+                >
+                  <Button
+                    title='Play'
+                    onPress={() => this.playGameButtonPress()}
+                  />
+                </View>
+              }
+            </View>
           </ImageBackground>
         </View>
       </>
@@ -59,6 +81,12 @@ const styles = StyleSheet.create({
   vertical: {
     flexDirection: 'column',
     height:'100%',
+  },
+  horizontal: {
+    flex:1,
+    flexDirection: 'row',
+    width: '100%',
+    // backgroundColor: 'green'
   },
   playGameContainer: {
     height: '15%',
@@ -72,6 +100,18 @@ const styles = StyleSheet.create({
     width:'100%',
     height:'100%',
   },
+  pullRight: {
+    width: '30%',
+    // backgroundColor: 'blue',
+    marginLeft: 'auto',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 20,
+  },
+  pullLeft: {
+    justifyContent: 'center',
+    fontSize: 20,
+  }
 });
 
 
