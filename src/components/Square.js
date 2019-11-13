@@ -17,6 +17,9 @@ import {
   gameOver
 } from '../actions/game';
 import { bindActionCreators } from 'redux';
+import SocketIOClient from 'socket.io-client';
+import io from 'socket.io-client';
+
 
 class Square extends Component {
 
@@ -25,6 +28,18 @@ class Square extends Component {
 
     this.rowIndex = this.props.rowIndex;
     this.colIndex = this.props.colIndex;
+
+    // this.socket = io('http://localhost:3005');
+    //
+    // // Listens to socketUpdateGameReducer and display the data recieved
+    // this.socket.on('socketUpdateGameReducer', (data) => {
+    //   console.log("socketUpdateWinningPlayer: ", data)
+    //
+    //   let { newBoard, newPlayerTurn } = data;
+    //   this.props.actions.changeBoard(newBoard);
+    //   this.props.actions.newTurn(this.props.game.playerTurn);
+    //   this.props.actions.updateWinningPlayer(newBoard);
+    // });
   }
 
   numberToColor = () => {
@@ -60,6 +75,12 @@ class Square extends Component {
         [this.props.colIndex]: this.props.game.playerTurn
       })
     })
+
+    // data = {
+    //   newBoard: newBoard,
+    //   newPlayerTurn: this.props.game.playerTurn,
+    // }
+    // this.socket.emit('socketUpdateGameReducer', data);
 
     this.props.actions.changeBoard(newBoard);
     this.props.actions.newTurn(this.props.game.playerTurn);

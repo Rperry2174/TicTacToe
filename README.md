@@ -9,3 +9,6 @@ Tic Tac Toe
 
 # Instructions
 `https://github.com/GeekyAnts/NativeBase/issues/928`
+
+# run server.js
+`node server.js`

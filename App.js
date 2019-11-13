@@ -34,9 +34,6 @@ import GameOver from './src/components/GameOver'
 import PlayerInput from './src/components/PlayerInput'
 import Chalkboard from './src/components/Chalkboard'
 import WoodPanel from './src/components/WoodPanel'
-// {this.props.game.gameState == "title" && <Title /> }
-// {this.props.game.gameState == "playerInput" && <PlayerInput /> }
-// {this.props.game.gameState == "game" && <Game /> }
 
 class App extends Component {
   constructor(props) {
