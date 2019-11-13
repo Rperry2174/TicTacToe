@@ -1,99 +1,68 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, {Component} from 'react';
+import {StyleSheet, View, Text, ImageBackground} from 'react-native';
 
-import React, { Component } from 'react'
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  ImageBackground,
-} from 'react-native';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+const greyBrickWall = require('../assets/greyBrickWall.png');
+const chalkBoard = require('../assets/chalkboard.png');
 
 class Chalkboard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
-      <>
-        <ImageBackground
-          style={[styles.backgroundImage, styles.vertical]}
-          source={require('../assets/greyBrickWall.png')}
-        >
-          <Text
-            style={styles.mainTitle}>
-            Tic Tac Toe!
-          </Text>
-          <View
-            style={styles.positioningContainer}
-          >
-            <View
-              style={styles.chalkBoardContainer}
-            >
-              <ImageBackground
-                style={styles.backgroundImage}
-                source={require('../assets/chalkboard.png')}
-              >
-                <View
-                  style={{paddingHorizontal: 10, paddingTop: 50}}
-                >
-                  { this.props.children }
-                </View>
-              </ImageBackground>
-            </View>
+      <ImageBackground
+        style={[styles.backgroundImage, styles.vertical]}
+        source={greyBrickWall}
+      >
+        <Text style={styles.mainTitle}>Tic Tac Toe!</Text>
+        <View style={styles.positioningContainer}>
+          <View style={styles.chalkBoardContainer}>
+            <ImageBackground style={styles.backgroundImage} source={chalkBoard}>
+              <View style={styles.childViewPadding}>{this.props.children}</View>
+            </ImageBackground>
           </View>
-        </ImageBackground>
-      </>
+        </View>
+      </ImageBackground>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   vertical: {
     flexDirection: 'column',
-    height:'100%',
+    height: '100%',
+  },
+  childViewPadding: {
+    paddingHorizontal: 10,
+    paddingTop: 50,
   },
   mainTitle: {
-    fontSize: 48,
-    fontWeight: '600',
-    textAlign: 'center',
-    marginTop: 30,
-    fontFamily: "squeakychalksound",
-    fontSize: 45,
     color: 'yellow',
+    fontFamily: 'squeakychalksound',
+    fontSize: 45,
+    fontWeight: '600',
+    marginTop: 30,
+    textAlign: 'center',
     textShadowColor: '#7e4f09',
   },
   positioningContainer: {
-    flex: 1,
+    alignItems: 'center',
     // backgroundColor: 'blue',
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
   },
   chalkBoardContainer: {
-    width:'100%',
     height: '74%',
+    width: '100%',
   },
   backgroundImage: {
     flex: 1,
     flexDirection: 'column',
+    height: '100%',
     resizeMode: 'stretch',
-    width:'100%',
-    height:'100%',
+    width: '100%',
   },
 });
-
 
 const mapStateToProps = state => ({
   ...state,
@@ -103,4 +72,7 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({}, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chalkboard)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Chalkboard);
