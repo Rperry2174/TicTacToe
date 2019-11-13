@@ -1,151 +1,117 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
-import React, { Component } from 'react'
+import React, {Component} from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
   ImageBackground,
-  Button,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from 'react-native';
 
-import SocketIOClient from 'socket.io-client';
-import io from 'socket.io-client';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {changeGameState} from '../actions/game';
 
-import { changeGameState } from '../actions/game';
+const woodPanelBackground = require('../assets/woodPanel.jpg');
 
 class WoodPanel extends Component {
   constructor(props) {
     super(props);
-    // this.socket = io('http://localhost:3005');
-    // this.socket.on('connectToRoom', function(data) {
-    //   console.log(" [ CLIENT - NetworkInput ] is connected to room: ", data);
-    // });
+
+    this.playGameButtonPress = this.playGameButtonPress.bind(this);
   }
 
-  playGameButtonPress = () => {
-    this.props.actions.changeGameState("game")
-    // this.socket.emit('create', this.props.game.roomCode);
+  playGameButtonPress() {
+    this.props.actions.changeGameState('game');
   }
 
   render() {
-    let { playerTurn, players, winningPlayerIndex } = this.props.game;
+    const {playerTurn, players} = this.props.game;
+    const playerTurnText = (
+      <View style={styles.pullLeft}>
+        <Text style={styles.turnText}>Turn: {players[playerTurn]}</Text>
+      </View>
+    );
+
+    const playButton = (
+      <View style={styles.pullRight}>
+        <TouchableWithoutFeedback onPress={this.playGameButtonPress}>
+          <Text style={styles.playButton}>PLAY</Text>
+        </TouchableWithoutFeedback>
+      </View>
+    );
 
     return (
-      <>
-        <View
-          style={styles.playGameContainer}
+      <View style={styles.playGameContainer}>
+        <ImageBackground
+          style={[styles.backgroundImage, styles.vertical]}
+          source={woodPanelBackground}
         >
-          <ImageBackground
-            style={[styles.backgroundImage, styles.vertical]}
-            source={require('../assets/woodPanel.jpg')}
-          >
-            <View style={styles.horizontal}>
-              {
-                this.props.game.gameState == "game" &&
-                this.props.game.winningPlayerIndex == null &&
-                <View
-                  style={styles.pullLeft}
-                >
-                  <Text
-                    style={styles.turnText}
-                  >
-                    Turn: {players[playerTurn]}
-                  </Text>
-                </View>
-              }
-              {
-                this.props.game.gameState == "playerInput" &&
-                <View
-                  style={styles.pullRight}
-                >
-                  <TouchableWithoutFeedback
-                    onPress={this.playGameButtonPress}
-                  >
-                    <Text
-                      style={styles.playButton}
-                    >
-                      PLAY
-                    </Text>
-                  </TouchableWithoutFeedback>
-
-                </View>
-              }
-            </View>
-          </ImageBackground>
-        </View>
-      </>
+          <View style={styles.horizontal}>
+            {this.props.game.gameState === 'game' &&
+              this.props.game.winningPlayerIndex == null &&
+              playerTurnText}
+            {this.props.game.gameState === 'playerInput' && playButton}
+          </View>
+        </ImageBackground>
+      </View>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   vertical: {
     flexDirection: 'column',
-    height:'100%',
+    height: '100%',
   },
   horizontal: {
-    flex:1,
+    // backgroundColor: 'green'
+    flex: 1,
     flexDirection: 'row',
     width: '100%',
-    // backgroundColor: 'green'
   },
   playGameContainer: {
+    alignItems: 'center',
     height: '15%',
     justifyContent: 'center',
-    alignItems: 'center'
   },
   backgroundImage: {
     flex: 1,
     flexDirection: 'column',
+    height: '100%',
     resizeMode: 'stretch',
-    width:'100%',
-    height:'100%',
+    width: '100%',
   },
   pullRight: {
-    width: '30%',
-    // backgroundColor: 'blue',
-    marginLeft: 'auto',
-    justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor: 'blue',
     fontSize: 20,
+    justifyContent: 'center',
+    marginLeft: 'auto',
+    width: '30%',
   },
   pullLeft: {
-    justifyContent: 'center',
     fontSize: 20,
+    justifyContent: 'center',
   },
   playButton: {
-    fontFamily: "WarungKopi",
-    fontSize: 45,
     color: '#492e06',
-    textShadowColor: '#7e4f09',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10
-  },
-  turnText: {
-    fontFamily: "WarungKopi",
+    fontFamily: 'WarungKopi',
     fontSize: 45,
-    color: '#492e06',
     textShadowColor: '#7e4f09',
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
-    paddingLeft: 10
-  }
+  },
+  turnText: {
+    color: '#492e06',
+    fontFamily: 'WarungKopi',
+    fontSize: 45,
+    paddingLeft: 10,
+    textShadowColor: '#7e4f09',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+  },
 });
-
 
 const mapStateToProps = state => ({
   ...state,
@@ -155,4 +121,7 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({changeGameState}, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WoodPanel)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(WoodPanel);
