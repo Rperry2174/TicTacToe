@@ -6,6 +6,7 @@ import {
   EDIT_PLAYER,
   NEW_TURN,
   UPDATE_WINNING_PLAYER,
+  EDIT_ROOM_CODE,
 } from '../constants';
 
 export function changeBoard(board) {
@@ -40,6 +41,13 @@ export function editPlayer(playerIndex, playerName) {
   return {
     type: EDIT_PLAYER,
     payload: { playerIndex: playerIndex, playerName: playerName }
+  }
+}
+
+export function editRoomCode(roomCode) {
+  return {
+    type: EDIT_ROOM_CODE,
+    payload: roomCode
   }
 }
 

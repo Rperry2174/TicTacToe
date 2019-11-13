@@ -10,7 +10,7 @@ import {
 import GameModeSelection from './GameModeSelection'
 
 import { connect } from 'react-redux';
-import { editPlayer } from '../actions/game';
+import { editPlayer, editRoomCode } from '../actions/game';
 import { bindActionCreators } from 'redux';
 import { PIECE_OPTIONS } from '../constants'
 
@@ -20,11 +20,20 @@ class NetworkInput extends Component {
     super(props);
   }
 
-  onChangeText = (playerIndex, playerName) => {
+  onChangeRoomCode = (roomCode) => {
+    console.log("changing roomcode: ", roomCode);
+    this.props.actions.editRoomCode(roomCode);
+  }
+
+  onChangePlayerName = (playerIndex, playerName) => {
     this.props.actions.editPlayer(playerIndex, playerName);
   }
 
   makePlayerInputBoxes = () => {
+    if(this.props.game.roomCode.length == "") {
+      return;
+    }
+
     let  { players } = this.props.game;
     let xColor = "#00ef05";
     let oColor = "#ed0303";
@@ -42,7 +51,7 @@ class NetworkInput extends Component {
           </Text>
           <TextInput
             style={styles.inputBox}
-            onChangeText={ text => this.onChangeText(i, text) }
+            onChangeText={ text => this.onChangePlayerName(i, text) }
             value= { players[i] }
           />
         </View>
@@ -63,16 +72,10 @@ class NetworkInput extends Component {
         </Text>
         <TextInput
           style={styles.inputBox}
-          onChangeText={ text => this.onChangeText(i, text) }
+          onChangeText={ text => this.onChangeRoomCode(text) }
           value= { this.props.game.roomCode }
         />
         { this.makePlayerInputBoxes() }
-        <Text>
-          {this.props.game.players[0]}
-        </Text>
-        <Text>
-          {this.props.game.players[1]}
-        </Text>
       </View>
     )
   }
@@ -110,7 +113,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({editPlayer}, dispatch),
+  actions: bindActionCreators({editPlayer, editRoomCode}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NetworkInput)

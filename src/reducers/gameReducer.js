@@ -5,7 +5,8 @@ import {
   EDIT_PLAYER,
   NEW_TURN,
   UPDATE_WINNING_PLAYER,
-  RESTART_GAME
+  RESTART_GAME,
+  EDIT_ROOM_CODE
 } from '../constants';
 
 const initialState = {
@@ -46,6 +47,11 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         players: newPlayers
+      };
+    case EDIT_ROOM_CODE:
+      return {
+        ...state,
+        roomCode: action.payload
       };
     case NEW_TURN:
       return {

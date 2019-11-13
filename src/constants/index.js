@@ -15,3 +15,5 @@ export const RESTART_GAME = 'RESTART_GAME'
 export const PIECE_OPTIONS = ['X', 'O']
 
 export const GAME_MODE_OPTIONS = ['One Player', 'Two Player', 'Network']
+
+export const EDIT_ROOM_CODE = 'EDIT_ROOM_CODE'
