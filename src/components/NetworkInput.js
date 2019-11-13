@@ -5,19 +5,39 @@ import {
   Text,
   TextInput,
   View,
+  TouchableOpacity,
 } from 'react-native'
 
 import GameModeSelection from './GameModeSelection'
 
 import { connect } from 'react-redux';
-import { editPlayer, editRoomCode } from '../actions/game';
+import { editPlayer, editRoomCode, addPlayer, assignNetworkId } from '../actions/game';
 import { bindActionCreators } from 'redux';
 import { PIECE_OPTIONS } from '../constants'
+
+import SocketIOClient from 'socket.io-client';
+import io from 'socket.io-client';
 
 class NetworkInput extends Component {
 
   constructor(props) {
     super(props);
+
+    this.socket = io('http://localhost:3005');
+
+    this.socket.on('addPlayerToLobby', (players) => {
+      console.log("[ CLIENT ] addPlayerToLobby  :  ", players)
+      this.props.actions.addPlayer()
+      //FIXME: should be a better way to do this
+      this.socket.emit('syncLobby', this.props.game.players);
+    });
+
+    this.socket.on('syncLobby', (players) => {
+      console.log("[ CLIENT ] syncLobby  :  ", players)
+      if(this.props.game.networkId == null) {
+        this.props.actions.assignNetworkId(players.length - 1)
+      }
+    });
   }
 
   onChangeRoomCode = (roomCode) => {
@@ -26,12 +46,30 @@ class NetworkInput extends Component {
   }
 
   onChangePlayerName = (playerIndex, playerName) => {
-    this.props.actions.editPlayer(playerIndex, playerName);
+    if(this.props.game.networkId == playerIndex) {
+      this.props.actions.editPlayer(playerIndex, playerName);
+    }
+  }
+
+  joinLobby = (roomCode) => {
+    // this.socket.emit('syncLobby', this.props.game.players);
+    this.socket.emit('addPlayerToLobby', this.props.game.players);
   }
 
   makePlayerInputBoxes = () => {
-    if(this.props.game.roomCode.length == "") {
-      return;
+    if(this.props.game.roomCode.length == "" || this.props.game.players.length == 0) {
+
+      return(
+        <TouchableOpacity
+          onPress={() => this.joinLobby()}
+        >
+          <Text
+            style={styles.buttonText}
+          >
+            Join
+          </Text>
+        </TouchableOpacity>
+      )
     }
 
     let  { players } = this.props.game;
@@ -106,6 +144,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#000000',
   },
+  buttonText: {
+    fontSize: 40,
+    textAlign: 'center',
+    fontFamily: "squeakychalksound",
+    color: 'white'
+  }
 })
 
 const mapStateToProps = state => ({
@@ -113,7 +157,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({editPlayer, editRoomCode}, dispatch),
+  actions: bindActionCreators({editPlayer, editRoomCode, addPlayer, assignNetworkId}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NetworkInput)

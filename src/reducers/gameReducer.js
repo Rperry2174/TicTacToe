@@ -2,20 +2,23 @@ import {
   BOARD_CHANGE,
   GAME_MODE_CHANGE,
   GAME_STATE_CHANGE,
+  ADD_PLAYER,
   EDIT_PLAYER,
   NEW_TURN,
   UPDATE_WINNING_PLAYER,
   RESTART_GAME,
-  EDIT_ROOM_CODE
+  EDIT_ROOM_CODE,
+  ASSIGN_NETWORK_ID,
 } from '../constants';
 
 const initialState = {
+  networkId: null,
   gameState: "title",
   winningPlayerIndex: null,
-  players: ["", ""],
+  players: [],
   mode: 1,
   playerTurn: 0,
-  roomCode: "roomcode1234",
+  roomCode: "",
   matrix: [
     [10, 10, 10],
     [10, 10, 10],
@@ -48,6 +51,14 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         players: newPlayers
       };
+    case ADD_PLAYER:
+      let newPlayer = state.players;
+      newPlayer.push("")
+
+      return {
+        ...state,
+        players: newPlayer
+      };
     case EDIT_ROOM_CODE:
       return {
         ...state,
@@ -74,6 +85,11 @@ const gameReducer = (state = initialState, action) => {
         ],
         playerTurn: 0,
         gameState: action.payload
+      };
+    case ASSIGN_NETWORK_ID:
+      return {
+        ...state,
+        networkId: action.payload
       };
 
     default:

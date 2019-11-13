@@ -19,6 +19,18 @@ io.on('connection', function(socket){
     console.log("socketUpdateGameReducer: ", data)
   });
 
+  socket.on('syncLobby', function(players) {
+    console.log("[SERVER] syncLobby players: ", players)
+    socket.join('lobby');
+    io.sockets.in('lobby').emit('syncLobby', players);
+  });
+
+  socket.on('addPlayerToLobby', function(players) {
+    console.log("[SERVER] addPlayerToLobby players: ", players)
+    socket.join('lobby');
+    io.sockets.in('lobby').emit('addPlayerToLobby', players);
+  });
+
   socket.on('create', function(room) {
     console.log("[SERVER] joining room: ", room)
     socket.join(room);

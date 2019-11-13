@@ -17,3 +17,7 @@ export const PIECE_OPTIONS = ['X', 'O']
 export const GAME_MODE_OPTIONS = ['One Player', 'Two Player', 'Network']
 
 export const EDIT_ROOM_CODE = 'EDIT_ROOM_CODE'
+
+export const ADD_PLAYER = 'ADD_PLAYER'
+
+export const ASSIGN_NETWORK_ID = 'ASSIGN_NETWORK_ID'

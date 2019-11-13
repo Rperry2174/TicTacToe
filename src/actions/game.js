@@ -7,6 +7,8 @@ import {
   NEW_TURN,
   UPDATE_WINNING_PLAYER,
   EDIT_ROOM_CODE,
+  ADD_PLAYER,
+  ASSIGN_NETWORK_ID
 } from '../constants';
 
 export function changeBoard(board) {
@@ -41,6 +43,20 @@ export function editPlayer(playerIndex, playerName) {
   return {
     type: EDIT_PLAYER,
     payload: { playerIndex: playerIndex, playerName: playerName }
+  }
+}
+
+export function addPlayer() {
+  return {
+    type: ADD_PLAYER,
+    payload: ""
+  }
+}
+
+export function assignNetworkId(networkId) {
+  return {
+    type: ASSIGN_NETWORK_ID,
+    payload: networkId
   }
 }
 
