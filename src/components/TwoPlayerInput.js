@@ -1,75 +1,55 @@
-import React, { Component } from 'react'
-import {
-  Button,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native'
+import React, {Component} from 'react';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-import GameModeSelection from './GameModeSelection'
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
-import { connect } from 'react-redux';
-import { editPlayer } from '../actions/game';
-import { bindActionCreators } from 'redux';
-import { PIECE_OPTIONS } from '../constants'
+import {editPlayer} from '../actions/game';
+import {PIECE_OPTIONS} from '../constants';
 
 class TwoPlayerInput extends Component {
-
   constructor(props) {
     super(props);
+
+    this.onChangeText = this.onChangeText.bind(this);
+    this.playGameButtonPress = this.playGameButtonPress.bind(this);
+    this.makePlayerInputBoxes = this.makePlayerInputBoxes.bind(this);
   }
 
-  onChangeText = (playerIndex, playerName) => {
+  onChangeText(playerIndex, playerName) {
     this.props.actions.editPlayer(playerIndex, playerName);
   }
 
-  playGameButtonPress = () => {
-    this.props.actions.changeGameState("game")
+  playGameButtonPress() {
+    this.props.actions.changeGameState('game');
   }
 
-  makePlayerInputBoxes = () => {
-    let  { players } = this.props.game;
-    let xColor = "#00ef05";
-    let oColor = "#ed0303";
-    let colors = [xColor, oColor];
+  makePlayerInputBoxes() {
+    const {players} = this.props.game;
+    const xColor = '#00ef05';
+    const oColor = '#ed0303';
+    const colors = [xColor, oColor];
 
     const inputBoxes = players.map((player, i) => {
-
       return (
-        <View
-          key={i}
-        >
-          <Text
-            style={[styles.inputLabel, {color: colors[i]}]}>
-            { PIECE_OPTIONS[i] } Player {i + 1}
+        <View key={i}>
+          <Text style={[styles.inputLabel, {color: colors[i]}]}>
+            {PIECE_OPTIONS[i]} Player {i + 1}
           </Text>
           <TextInput
             style={styles.inputBox}
-            onChangeText={ text => this.onChangeText(i, text) }
-            value= { players[i] }
+            onChangeText={text => this.onChangeText(i, text)}
+            value={players[i]}
           />
         </View>
-      )
-    })
+      );
+    });
 
-    return(
-      inputBoxes
-    )
+    return inputBoxes;
   }
 
   render() {
-    return (
-      <View style={styles.vertical}>
-        { this.makePlayerInputBoxes() }
-        <Text>
-          {this.props.game.players[0]}
-        </Text>
-        <Text>
-          {this.props.game.players[1]}
-        </Text>
-      </View>
-    )
+    return <View style={styles.vertical}>{this.makePlayerInputBoxes()}</View>;
   }
 }
 
@@ -77,28 +57,28 @@ const styles = StyleSheet.create({
   vertical: {
     flexDirection: 'column',
     justifyContent: 'space-around',
-    padding: 10
+    padding: 10,
   },
   inputBox: {
-     height: 40,
-     borderColor: 'gray',
-     borderWidth: 1,
-     fontFamily: "squeakychalksound",
-     color: '#ffffff',
-     fontSize: 24,
-     paddingLeft: 10
+    borderColor: 'gray',
+    borderWidth: 1,
+    color: '#ffffff',
+    fontFamily: 'squeakychalksound',
+    fontSize: 24,
+    height: 40,
+    paddingLeft: 10,
   },
   inputLabel: {
+    fontFamily: 'squeakychalksound',
     fontSize: 24,
     fontWeight: '600',
-    fontFamily: "squeakychalksound"
   },
   mainTitle: {
+    color: '#000000',
     fontSize: 48,
     fontWeight: '600',
-    color: '#000000',
   },
-})
+});
 
 const mapStateToProps = state => ({
   ...state,
@@ -108,4 +88,7 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({editPlayer}, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TwoPlayerInput)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(TwoPlayerInput);
