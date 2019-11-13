@@ -83,6 +83,7 @@ const gameReducer = (state = initialState, action) => {
         winningPlayerIndex: null,
         matrix: [[10, 10, 10], [10, 10, 10], [10, 10, 10]],
         playerTurn: 0,
+        players: [],
         gameState: action.payload,
       };
     case ASSIGN_NETWORK_ID:

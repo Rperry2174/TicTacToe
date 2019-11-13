@@ -30,10 +30,10 @@ class GameOver extends Component {
         <Text style={styles.winnerName}>{players[winningPlayerIndex]}</Text>
         <View style={styles.restartOptions}>
           <TouchableWithoutFeedback onPress={this.restartGame}>
-            <Text style={styles.playButton}>Play Again</Text>
+            <Text style={styles.restartButton}>Play Again</Text>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={this.goToTitle}>
-            <Text style={styles.playButton}>Home</Text>
+            <Text style={styles.restartButton}>Home</Text>
           </TouchableWithoutFeedback>
         </View>
       </View>
@@ -46,11 +46,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     padding: 10,
-  },
-  inputBox: {
-    borderColor: 'gray',
-    borderWidth: 1,
-    height: 40,
   },
   inputLabel: {
     fontSize: 24,
@@ -74,7 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 35,
     textAlign: 'center',
   },
-  playButton: {
+  restartButton: {
     color: '#ffffff',
     fontFamily: 'squeakychalksound',
     fontSize: 25,
