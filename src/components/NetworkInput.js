@@ -60,6 +60,8 @@ class NetworkInput extends Component {
   }
 
   onChangePlayerName(playerIndex, playerName) {
+    if (this.props.game.networkId !== playerIndex) return;
+
     const playerInfo = {
       playerIndex: this.props.game.networkId,
       playerName,

@@ -85,6 +85,7 @@ const gameReducer = (state = initialState, action) => {
         playerTurn: 0,
         players: [],
         gameState: action.payload,
+        roomCode: '',
       };
     case ASSIGN_NETWORK_ID:
       return {
