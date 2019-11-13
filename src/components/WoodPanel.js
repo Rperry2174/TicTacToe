@@ -10,7 +10,7 @@ import {
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {changeGameState} from '../actions/game';
+import {changeGameState, restartGame} from '../actions/game';
 
 const woodPanelBackground = require('../assets/woodPanel.jpg');
 
@@ -19,10 +19,15 @@ class WoodPanel extends Component {
     super(props);
 
     this.playGameButtonPress = this.playGameButtonPress.bind(this);
+    this.backButtonPress = this.backButtonPress.bind(this);
   }
 
   playGameButtonPress() {
     this.props.actions.changeGameState('game');
+  }
+
+  backButtonPress() {
+    this.props.actions.restartGame('title');
   }
 
   render() {
@@ -34,10 +39,17 @@ class WoodPanel extends Component {
     );
 
     const playButton = (
-      <View style={styles.pullRight}>
-        <TouchableWithoutFeedback onPress={this.playGameButtonPress}>
-          <Text style={styles.playButton}>PLAY</Text>
-        </TouchableWithoutFeedback>
+      <View style={styles.buttonContainer}>
+        <View style={styles.pullLeft}>
+          <TouchableWithoutFeedback onPress={this.backButtonPress}>
+            <Text style={styles.playButton}>Back</Text>
+          </TouchableWithoutFeedback>
+        </View>
+        <View style={styles.pullRight}>
+          <TouchableWithoutFeedback onPress={this.playGameButtonPress}>
+            <Text style={styles.playButton}>PLAY</Text>
+          </TouchableWithoutFeedback>
+        </View>
       </View>
     );
 
@@ -82,17 +94,25 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     width: '100%',
   },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    // backgroundColor: 'yellow'
+  },
   pullRight: {
     alignItems: 'center',
-    // backgroundColor: 'blue',
+    // backgroundColor: 'green',
     fontSize: 20,
     justifyContent: 'center',
     marginLeft: 'auto',
     width: '30%',
   },
   pullLeft: {
+    alignItems: 'center',
+    // backgroundColor: 'blue',
     fontSize: 20,
     justifyContent: 'center',
+    width: '30%',
   },
   playButton: {
     color: '#492e06',
@@ -118,7 +138,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({changeGameState}, dispatch),
+  actions: bindActionCreators({changeGameState, restartGame}, dispatch),
 });
 
 export default connect(
