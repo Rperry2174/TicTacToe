@@ -14,35 +14,31 @@ import {
 
 const initialState = {
   networkId: null,
-  gameState: "title",
+  gameState: 'title',
   winningPlayerIndex: null,
   players: [],
   mode: 1,
   playerTurn: 0,
-  roomCode: "",
-  matrix: [
-    [10, 10, 10],
-    [10, 10, 10],
-    [10, 10, 10],
-  ]
+  roomCode: '',
+  matrix: [[10, 10, 10], [10, 10, 10], [10, 10, 10]],
 };
 
 const gameReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case BOARD_CHANGE:
       return {
         ...state,
-        matrix: action.payload
+        matrix: action.payload,
       };
     case GAME_MODE_CHANGE:
       return {
         ...state,
-        mode: action.payload
+        mode: action.payload,
       };
     case GAME_STATE_CHANGE:
       return {
         ...state,
-        gameState: action.payload
+        gameState: action.payload,
       };
     case EDIT_PLAYER:
       let newPlayers = state.players;
@@ -50,58 +46,54 @@ const gameReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        players: newPlayers
+        players: newPlayers,
       };
     case ADD_PLAYER:
       let newPlayer = state.players;
-      newPlayer.push("")
+      newPlayer.push('');
 
       return {
         ...state,
-        players: newPlayer
+        players: newPlayer,
       };
 
     case SYNC_PLAYERS:
       return {
         ...state,
-        players: action.payload
-      }
+        players: action.payload,
+      };
     case EDIT_ROOM_CODE:
       return {
         ...state,
-        roomCode: action.payload
+        roomCode: action.payload,
       };
     case NEW_TURN:
       return {
         ...state,
-        playerTurn: action.payload
+        playerTurn: action.payload,
       };
     case UPDATE_WINNING_PLAYER:
       return {
         ...state,
-        winningPlayerIndex: action.payload
+        winningPlayerIndex: action.payload,
       };
     case RESTART_GAME:
       return {
         ...state,
         winningPlayerIndex: null,
-        matrix: [
-          [10, 10, 10],
-          [10, 10, 10],
-          [10, 10, 10],
-        ],
+        matrix: [[10, 10, 10], [10, 10, 10], [10, 10, 10]],
         playerTurn: 0,
-        gameState: action.payload
+        gameState: action.payload,
       };
     case ASSIGN_NETWORK_ID:
       return {
         ...state,
-        networkId: action.payload
+        networkId: action.payload,
       };
 
     default:
       return state;
   }
-}
+};
 
 export default gameReducer;
