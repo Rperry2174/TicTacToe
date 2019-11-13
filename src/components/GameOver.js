@@ -8,6 +8,7 @@ import {restartGame} from '../actions/game';
 class GameOver extends Component {
   constructor(props) {
     super(props);
+
     this.restartGame = this.restartGame.bind(this);
     this.goToTitle = this.goToTitle.bind(this);
   }

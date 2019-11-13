@@ -11,8 +11,8 @@ import {changeBoard} from '../actions/game';
 class Row extends Component {
   constructor(props) {
     super(props);
-    this.rowIndex = this.props.rowIndex;
 
+    this.rowIndex = this.props.rowIndex;
     this.drawRow = this.drawRow.bind(this);
   }
 

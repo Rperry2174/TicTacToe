@@ -10,6 +10,7 @@ import {changeGameMode, changeGameState} from '../actions/game';
 class GameModeSelection extends Component {
   constructor(props) {
     super(props);
+
     this.onButtonPress = this.onButtonPress.bind(this);
     this.createButtons = this.createButtons.bind(this);
   }
