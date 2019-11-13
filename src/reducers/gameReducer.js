@@ -14,6 +14,7 @@ const initialState = {
   players: ["", ""],
   mode: 1,
   playerTurn: 0,
+  roomCode: "roomcode1234",
   matrix: [
     [10, 10, 10],
     [10, 10, 10],

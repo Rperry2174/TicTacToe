@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   gameModeText: {
-    fontSize: 40,
+    fontSize: 45,
     textAlign: 'center',
     fontFamily: "squeakychalksound",
     color: '#e6e6e6'

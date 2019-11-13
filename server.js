@@ -13,8 +13,14 @@ io.on('connection', function(socket){
   });
 
   socket.on('socketUpdateGameReducer', function(data){
-    socket.emit('socketUpdateGameReducer', data);
+    io.sockets.in('room1').emit('socketUpdateGameReducer', data);
     console.log("socketUpdateGameReducer: ", data)
+  });
+
+  socket.on('create', function(room) {
+    console.log("[SERVER] joining room: ", room)
+    socket.join(room);
+    io.sockets.in(room).emit('connectToRoom', "You are in room no. " + room);
   });
 
 });

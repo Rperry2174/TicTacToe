@@ -29,17 +29,22 @@ class Square extends Component {
     this.rowIndex = this.props.rowIndex;
     this.colIndex = this.props.colIndex;
 
-    // this.socket = io('http://localhost:3005');
-    //
-    // // Listens to socketUpdateGameReducer and display the data recieved
-    // this.socket.on('socketUpdateGameReducer', (data) => {
-    //   console.log("socketUpdateWinningPlayer: ", data)
-    //
-    //   let { newBoard, newPlayerTurn } = data;
-    //   this.props.actions.changeBoard(newBoard);
-    //   this.props.actions.newTurn(this.props.game.playerTurn);
-    //   this.props.actions.updateWinningPlayer(newBoard);
-    // });
+    this.socket = io('http://localhost:3005');
+
+    // Listens to socketUpdateGameReducer and display the data recieved
+    this.socket.on('socketUpdateGameReducer', (data) => {
+      console.log("socketUpdateWinningPlayer: ", data)
+
+      let { newBoard, newPlayerTurn } = data;
+      this.props.actions.changeBoard(newBoard);
+      this.props.actions.newTurn(this.props.game.playerTurn);
+      this.props.actions.updateWinningPlayer(newBoard);
+    });
+
+    this.socket.emit('create', 'room1');
+    this.socket.on('connectToRoom', function(data) {
+      console.log(" [ CLIENT ] is connected to room: ", data);
+    });
   }
 
   numberToColor = () => {
@@ -76,15 +81,15 @@ class Square extends Component {
       })
     })
 
-    // data = {
-    //   newBoard: newBoard,
-    //   newPlayerTurn: this.props.game.playerTurn,
-    // }
-    // this.socket.emit('socketUpdateGameReducer', data);
+    data = {
+      newBoard: newBoard,
+      newPlayerTurn: this.props.game.playerTurn,
+    }
+    this.socket.emit('socketUpdateGameReducer', data);
 
-    this.props.actions.changeBoard(newBoard);
-    this.props.actions.newTurn(this.props.game.playerTurn);
-    this.props.actions.updateWinningPlayer(newBoard);
+    // this.props.actions.changeBoard(newBoard);
+    // this.props.actions.newTurn(this.props.game.playerTurn);
+    // this.props.actions.updateWinningPlayer(newBoard);
   }
 
   render() {
