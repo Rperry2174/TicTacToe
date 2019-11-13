@@ -24,10 +24,6 @@ class NetworkInput extends Component {
     this.props.actions.editPlayer(playerIndex, playerName);
   }
 
-  playGameButtonPress = () => {
-    this.props.actions.changeGameState("game")
-  }
-
   makePlayerInputBoxes = () => {
     let  { players } = this.props.game;
     let xColor = "#00ef05";

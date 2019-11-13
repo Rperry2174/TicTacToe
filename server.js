@@ -13,7 +13,9 @@ io.on('connection', function(socket){
   });
 
   socket.on('socketUpdateGameReducer', function(data){
-    io.sockets.in('room1').emit('socketUpdateGameReducer', data);
+    let { roomCode } = data;
+    socket.join(roomCode);
+    io.sockets.in(roomCode).emit('socketUpdateGameReducer', data);
     console.log("socketUpdateGameReducer: ", data)
   });
 

@@ -41,10 +41,13 @@ class Square extends Component {
       this.props.actions.updateWinningPlayer(newBoard);
     });
 
-    this.socket.emit('create', 'room1');
-    this.socket.on('connectToRoom', function(data) {
-      console.log(" [ CLIENT ] is connected to room: ", data);
-    });
+    this.socket.emit('create', this.props.game.roomCode + this.rowIndex + this.colIndex);
+
+
+    // this.socket.emit('create', 'room1');
+    // this.socket.on('connectToRoom', function(data) {
+    //   console.log(" [ CLIENT ] is connected to room: ", data);
+    // });
   }
 
   numberToColor = () => {
@@ -84,6 +87,7 @@ class Square extends Component {
     data = {
       newBoard: newBoard,
       newPlayerTurn: this.props.game.playerTurn,
+      roomCode: this.props.game.roomCode + this.rowIndex + this.colIndex,
     }
     this.socket.emit('socketUpdateGameReducer', data);
 

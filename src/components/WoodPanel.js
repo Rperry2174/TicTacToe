@@ -19,6 +19,9 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 
+import SocketIOClient from 'socket.io-client';
+import io from 'socket.io-client';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -27,10 +30,15 @@ import { changeGameState } from '../actions/game';
 class WoodPanel extends Component {
   constructor(props) {
     super(props);
+    // this.socket = io('http://localhost:3005');
+    // this.socket.on('connectToRoom', function(data) {
+    //   console.log(" [ CLIENT - NetworkInput ] is connected to room: ", data);
+    // });
   }
 
   playGameButtonPress = () => {
     this.props.actions.changeGameState("game")
+    // this.socket.emit('create', this.props.game.roomCode);
   }
 
   render() {
