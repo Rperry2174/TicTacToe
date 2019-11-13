@@ -9,6 +9,7 @@ import {
   RESTART_GAME,
   EDIT_ROOM_CODE,
   ASSIGN_NETWORK_ID,
+  SYNC_PLAYERS,
 } from '../constants';
 
 const initialState = {
@@ -59,6 +60,12 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         players: newPlayer
       };
+
+    case SYNC_PLAYERS:
+      return {
+        ...state,
+        players: action.payload
+      }
     case EDIT_ROOM_CODE:
       return {
         ...state,

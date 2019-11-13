@@ -28,7 +28,13 @@ io.on('connection', function(socket){
   socket.on('addPlayerToLobby', function(players) {
     console.log("[SERVER] addPlayerToLobby players: ", players)
     socket.join('lobby');
+    io.sockets.in('lobby').emit('syncLobby', players);
     io.sockets.in('lobby').emit('addPlayerToLobby', players);
+  });
+
+  socket.on('editPlayerName', function(playerInfo) {
+    socket.join('lobby');
+    io.sockets.in('lobby').emit('editPlayerName', playerInfo);
   });
 
   socket.on('create', function(room) {

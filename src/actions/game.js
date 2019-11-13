@@ -8,7 +8,8 @@ import {
   UPDATE_WINNING_PLAYER,
   EDIT_ROOM_CODE,
   ADD_PLAYER,
-  ASSIGN_NETWORK_ID
+  ASSIGN_NETWORK_ID,
+  SYNC_PLAYERS
 } from '../constants';
 
 export function changeBoard(board) {
@@ -50,6 +51,13 @@ export function addPlayer() {
   return {
     type: ADD_PLAYER,
     payload: ""
+  }
+}
+
+export function syncPlayers(players) {
+  return {
+    type: SYNC_PLAYERS,
+    payload: players
   }
 }
 

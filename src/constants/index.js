@@ -20,4 +20,6 @@ export const EDIT_ROOM_CODE = 'EDIT_ROOM_CODE'
 
 export const ADD_PLAYER = 'ADD_PLAYER'
 
+export const SYNC_PLAYERS = 'SYNC_PLAYERS'
+
 export const ASSIGN_NETWORK_ID = 'ASSIGN_NETWORK_ID'

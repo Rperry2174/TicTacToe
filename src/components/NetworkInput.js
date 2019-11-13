@@ -11,7 +11,13 @@ import {
 import GameModeSelection from './GameModeSelection'
 
 import { connect } from 'react-redux';
-import { editPlayer, editRoomCode, addPlayer, assignNetworkId } from '../actions/game';
+import {
+  editPlayer,
+  editRoomCode,
+  addPlayer,
+  assignNetworkId,
+  syncPlayers
+} from '../actions/game';
 import { bindActionCreators } from 'redux';
 import { PIECE_OPTIONS } from '../constants'
 
@@ -28,13 +34,21 @@ class NetworkInput extends Component {
     this.socket.on('addPlayerToLobby', (players) => {
       console.log("[ CLIENT ] addPlayerToLobby  :  ", players)
       this.props.actions.addPlayer()
-      //FIXME: should be a better way to do this
       this.socket.emit('syncLobby', this.props.game.players);
+    });
+
+    this.socket.on('editPlayerName', (playerInfo) => {
+      console.log("[ CLIENT ] editPlayerName  :  ", playerInfo)
+      let { playerIndex, playerName } = playerInfo;
+      this.props.actions.editPlayer(playerIndex, playerName);
     });
 
     this.socket.on('syncLobby', (players) => {
       console.log("[ CLIENT ] syncLobby  :  ", players)
-      if(this.props.game.networkId == null) {
+      if(players.length > this.props.game.players) {
+        this.props.actions.syncPlayers(players);
+      }
+      if(this.props.game.networkId == null && players.length >= 1) {
         this.props.actions.assignNetworkId(players.length - 1)
       }
     });
@@ -46,13 +60,16 @@ class NetworkInput extends Component {
   }
 
   onChangePlayerName = (playerIndex, playerName) => {
-    if(this.props.game.networkId == playerIndex) {
-      this.props.actions.editPlayer(playerIndex, playerName);
+    playerInfo = {
+      playerIndex: this.props.game.networkId,
+      playerName: playerName
     }
+
+    this.socket.emit('editPlayerName', playerInfo);
   }
 
   joinLobby = (roomCode) => {
-    // this.socket.emit('syncLobby', this.props.game.players);
+    this.socket.emit('syncLobby', this.props.game.players);
     this.socket.emit('addPlayerToLobby', this.props.game.players);
   }
 
@@ -157,7 +174,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({editPlayer, editRoomCode, addPlayer, assignNetworkId}, dispatch),
+  actions: bindActionCreators({
+    editPlayer,
+    editRoomCode,
+    addPlayer,
+    assignNetworkId,
+    syncPlayers
+  }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NetworkInput)
