@@ -18,10 +18,9 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* TicTacToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TicTacToeTests.m */; };
 		3585191760E88F0842F93086 /* libPods-TicTacToe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA8AF84FD419EB20D66E6CE9 /* libPods-TicTacToe.a */; };
-		D5BE2185D70196C824787FC1 /* libPods-TicTacToe-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F4A43114BE0B24049DA292 /* libPods-TicTacToe-tvOSTests.a */; };
 		7CFDC517E33B498793B98109 /* squeakychalksound.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 077143F2F2D8461497C1A5AA /* squeakychalksound.ttf */; };
-		99706E627466459DB2B9B815 /* warung-kopi.regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA2E61F3CFA643B694A7EDDF /* warung-kopi.regular.otf */; };
 		C53A4DAB80654C8486A80C1D /* WarungKopi.otf in Resources */ = {isa = PBXBuildFile; fileRef = F8B0DC62A0964605A8A60299 /* WarungKopi.otf */; };
+		D5BE2185D70196C824787FC1 /* libPods-TicTacToe-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F4A43114BE0B24049DA292 /* libPods-TicTacToe-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +45,7 @@
 		00E356EE1AD99517003FC87E /* TicTacToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* TicTacToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeTests.m; sourceTree = "<group>"; };
+		077143F2F2D8461497C1A5AA /* squeakychalksound.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = squeakychalksound.ttf; path = ../src/assets/fonts/squeakychalksound.ttf; sourceTree = "<group>"; };
 		0A94B01B623784850CCE1046 /* libPods-TicTacToeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TicTacToeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		134B974A1379D693E4BEFC8F /* Pods-TicTacToeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TicTacToeTests.release.xcconfig"; path = "Target Support Files/Pods-TicTacToeTests/Pods-TicTacToeTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,13 +65,12 @@
 		8803173E95AC23A61FEF9008 /* libPods-TicTacToe-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TicTacToe-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94CCAC19FB061A702130D2AD /* Pods-TicTacToe-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TicTacToe-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-TicTacToe-tvOSTests/Pods-TicTacToe-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CA8AF84FD419EB20D66E6CE9 /* libPods-TicTacToe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TicTacToe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA2E61F3CFA643B694A7EDDF /* warung-kopi.regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "warung-kopi.regular.otf"; path = "../src/assets/fonts/warung-kopi.regular.otf"; sourceTree = "<group>"; };
 		DB2C38EE66DFBD7712851EA4 /* Pods-TicTacToe-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TicTacToe-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-TicTacToe-tvOSTests/Pods-TicTacToe-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		E7F4A43114BE0B24049DA292 /* libPods-TicTacToe-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TicTacToe-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		077143F2F2D8461497C1A5AA /* squeakychalksound.ttf */ = {isa = PBXFileReference; name = "squeakychalksound.ttf"; path = "../src/assets/fonts/squeakychalksound.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DA2E61F3CFA643B694A7EDDF /* warung-kopi.regular.otf */ = {isa = PBXFileReference; name = "warung-kopi.regular.otf"; path = "../src/assets/fonts/warung-kopi.regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F8B0DC62A0964605A8A60299 /* WarungKopi.otf */ = {isa = PBXFileReference; name = "WarungKopi.otf"; path = "../src/assets/fonts/WarungKopi.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F8B0DC62A0964605A8A60299 /* WarungKopi.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = WarungKopi.otf; path = ../src/assets/fonts/WarungKopi.otf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +140,16 @@
 			name = TicTacToe;
 			sourceTree = "<group>";
 		};
+		13FD4C02A3FD450789EF9D42 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				077143F2F2D8461497C1A5AA /* squeakychalksound.ttf */,
+				DA2E61F3CFA643B694A7EDDF /* warung-kopi.regular.otf */,
+				F8B0DC62A0964605A8A60299 /* WarungKopi.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,20 +209,8 @@
 				80E52C0885D2B5B2D49D687D /* Pods-TicTacToeTests.debug.xcconfig */,
 				134B974A1379D693E4BEFC8F /* Pods-TicTacToeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		13FD4C02A3FD450789EF9D42 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				077143F2F2D8461497C1A5AA /* squeakychalksound.ttf */,
-				DA2E61F3CFA643B694A7EDDF /* warung-kopi.regular.otf */,
-				F8B0DC62A0964605A8A60299 /* WarungKopi.otf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -356,7 +353,6 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				7CFDC517E33B498793B98109 /* squeakychalksound.ttf in Resources */,
-				99706E627466459DB2B9B815 /* warung-kopi.regular.otf in Resources */,
 				C53A4DAB80654C8486A80C1D /* WarungKopi.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
