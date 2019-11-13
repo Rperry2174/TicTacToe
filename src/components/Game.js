@@ -1,8 +1,9 @@
+import React, {Component} from 'react';
+import {StyleSheet, View} from 'react-native';
+
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
 import GameOver from './GameOver';
 import Row from './Row';
 
