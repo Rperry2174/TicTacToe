@@ -4,7 +4,7 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {editPlayer} from '../actions/game';
+import {editPlayer, syncPlayers} from '../actions/game';
 import {PIECE_OPTIONS} from '../constants';
 
 class TwoPlayerInput extends Component {
@@ -14,6 +14,10 @@ class TwoPlayerInput extends Component {
     this.onChangeText = this.onChangeText.bind(this);
     this.playGameButtonPress = this.playGameButtonPress.bind(this);
     this.makePlayerInputBoxes = this.makePlayerInputBoxes.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.actions.syncPlayers(['', '']);
   }
 
   onChangeText(playerIndex, playerName) {
@@ -85,7 +89,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({editPlayer}, dispatch),
+  actions: bindActionCreators({editPlayer, syncPlayers}, dispatch),
 });
 
 export default connect(

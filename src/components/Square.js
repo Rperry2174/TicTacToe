@@ -22,6 +22,7 @@ class Square extends Component {
     this.rowIndex = this.props.rowIndex;
     this.colIndex = this.props.colIndex;
     this.numberToColor = this.numberToColor.bind(this);
+    this.completeTurn = this.completeTurn.bind(this);
     this.onPressSquare = this.onPressSquare.bind(this);
 
     this.socket = io('http://localhost:3005');
@@ -29,9 +30,7 @@ class Square extends Component {
       console.log('socketUpdateWinningPlayer: ', data);
 
       const {newBoard} = data;
-      this.props.actions.changeBoard(newBoard);
-      this.props.actions.newTurn(this.props.game.playerTurn);
-      this.props.actions.updateWinningPlayer(newBoard);
+      this.completeTurn(newBoard);
     });
 
     this.socket.emit(
@@ -54,11 +53,27 @@ class Square extends Component {
       }),
     });
 
-    const data = {
-      newBoard,
-      roomCode: this.props.game.roomCode + this.rowIndex + this.colIndex,
-    };
-    this.socket.emit('socketUpdateGameReducer', data);
+    if (this.props.game.mode === 0) {
+      // Single Player
+      // TODO: add in Computer for single player logic
+      this.completeTurn(newBoard);
+    } else if (this.props.game.mode === 1) {
+      // Two player local
+      this.completeTurn(newBoard);
+    } else if (this.props.game.mode === 2) {
+      // Two player networked
+      const data = {
+        newBoard,
+        roomCode: this.props.game.roomCode + this.rowIndex + this.colIndex,
+      };
+      this.socket.emit('socketUpdateGameReducer', data);
+    }
+  }
+
+  completeTurn(newBoard) {
+    this.props.actions.changeBoard(newBoard);
+    this.props.actions.newTurn(this.props.game.playerTurn);
+    this.props.actions.updateWinningPlayer(newBoard);
   }
 
   numberToColor() {
