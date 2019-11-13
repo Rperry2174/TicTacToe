@@ -1,138 +1,125 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react';
 import {
-  Button,
   StyleSheet,
   Text,
   TextInput,
   View,
   TouchableOpacity,
-} from 'react-native'
+} from 'react-native';
 
-import GameModeSelection from './GameModeSelection'
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import io from 'socket.io-client';
 
-import { connect } from 'react-redux';
 import {
   editPlayer,
   editRoomCode,
   addPlayer,
   assignNetworkId,
-  syncPlayers
+  syncPlayers,
 } from '../actions/game';
-import { bindActionCreators } from 'redux';
-import { PIECE_OPTIONS } from '../constants'
 
-import SocketIOClient from 'socket.io-client';
-import io from 'socket.io-client';
+import {PIECE_OPTIONS} from '../constants';
 
 class NetworkInput extends Component {
-
   constructor(props) {
     super(props);
 
     this.socket = io('http://localhost:3005');
+    this.onChangeRoomCode = this.onChangeRoomCode.bind(this);
+    this.onChangePlayerName = this.onChangePlayerName.bind(this);
+    this.joinLobby = this.joinLobby.bind(this);
+    this.makePlayerInputBoxes = this.makePlayerInputBoxes.bind(this);
 
-    this.socket.on('addPlayerToLobby', (players) => {
-      console.log("[ CLIENT ] addPlayerToLobby  :  ", players)
-      this.props.actions.addPlayer()
+    this.socket.on('addPlayerToLobby', players => {
+      console.log('[ CLIENT ] addPlayerToLobby  :  ', players);
+      this.props.actions.addPlayer();
       this.socket.emit('syncLobby', this.props.game.players);
     });
 
-    this.socket.on('editPlayerName', (playerInfo) => {
-      console.log("[ CLIENT ] editPlayerName  :  ", playerInfo)
-      let { playerIndex, playerName } = playerInfo;
+    this.socket.on('editPlayerName', playerInfo => {
+      console.log('[ CLIENT ] editPlayerName  :  ', playerInfo);
+      const {playerIndex, playerName} = playerInfo;
       this.props.actions.editPlayer(playerIndex, playerName);
     });
 
-    this.socket.on('syncLobby', (players) => {
-      console.log("[ CLIENT ] syncLobby  :  ", players)
-      if(players.length > this.props.game.players) {
+    this.socket.on('syncLobby', players => {
+      console.log('[ CLIENT ] syncLobby  :  ', players);
+      if (players.length > this.props.game.players) {
         this.props.actions.syncPlayers(players);
       }
-      if(this.props.game.networkId == null && players.length >= 1) {
-        this.props.actions.assignNetworkId(players.length - 1)
+      if (this.props.game.networkId == null && players.length >= 1) {
+        this.props.actions.assignNetworkId(players.length - 1);
       }
     });
   }
 
-  onChangeRoomCode = (roomCode) => {
-    console.log("changing roomcode: ", roomCode);
+  onChangeRoomCode(roomCode) {
+    console.log('changing roomcode: ', roomCode);
     this.props.actions.editRoomCode(roomCode);
   }
 
-  onChangePlayerName = (playerIndex, playerName) => {
-    playerInfo = {
+  onChangePlayerName(playerIndex, playerName) {
+    const playerInfo = {
       playerIndex: this.props.game.networkId,
-      playerName: playerName
-    }
+      playerName,
+    };
 
     this.socket.emit('editPlayerName', playerInfo);
   }
 
-  joinLobby = (roomCode) => {
+  joinLobby() {
     this.socket.emit('syncLobby', this.props.game.players);
     this.socket.emit('addPlayerToLobby', this.props.game.players);
   }
 
-  makePlayerInputBoxes = () => {
-    if(this.props.game.roomCode.length == "" || this.props.game.players.length == 0) {
-
-      return(
-        <TouchableOpacity
-          onPress={() => this.joinLobby()}
-        >
-          <Text
-            style={styles.buttonText}
-          >
-            Join
-          </Text>
+  makePlayerInputBoxes() {
+    if (
+      this.props.game.roomCode.length === '' ||
+      this.props.game.players.length === 0
+    ) {
+      return (
+        <TouchableOpacity onPress={() => this.joinLobby()}>
+          <Text style={styles.buttonText}>Join</Text>
         </TouchableOpacity>
-      )
+      );
     }
 
-    let  { players } = this.props.game;
-    let xColor = "#00ef05";
-    let oColor = "#ed0303";
-    let colors = [xColor, oColor];
+    const {players} = this.props.game;
+    const xColor = '#00ef05';
+    const oColor = '#ed0303';
+    const colors = [xColor, oColor];
 
     const inputBoxes = players.map((player, i) => {
-
       return (
-        <View
-          key={i}
-        >
-          <Text
-            style={[styles.inputLabel, {color: colors[i]}]}>
-            { PIECE_OPTIONS[i] } Player {i + 1}
+        <View key={i}>
+          <Text style={[styles.inputLabel, {color: colors[i]}]}>
+            {PIECE_OPTIONS[i]} Player {i + 1}
           </Text>
           <TextInput
             style={styles.inputBox}
-            onChangeText={ text => this.onChangePlayerName(i, text) }
-            value= { players[i] }
+            onChangeText={text => this.onChangePlayerName(i, text)}
+            value={players[i]}
           />
         </View>
-      )
-    })
+      );
+    });
 
-    return(
-      inputBoxes
-    )
+    return inputBoxes;
   }
 
   render() {
     return (
       <View style={styles.vertical}>
-        <Text
-          style={[styles.inputLabel, {color: "white"}]}>
-          Room code:
-        </Text>
+        <Text style={styles.inputLabel}>Room code:</Text>
         <TextInput
           style={styles.inputBox}
-          onChangeText={ text => this.onChangeRoomCode(text) }
-          value= { this.props.game.roomCode }
+          onChangeText={text => this.onChangeRoomCode(text)}
+          value={this.props.game.roomCode}
         />
-        { this.makePlayerInputBoxes() }
+        {this.makePlayerInputBoxes()}
       </View>
-    )
+    );
   }
 }
 
@@ -140,21 +127,22 @@ const styles = StyleSheet.create({
   vertical: {
     flexDirection: 'column',
     justifyContent: 'space-around',
-    padding: 10
+    padding: 10,
   },
   inputBox: {
-     height: 30,
-     borderColor: 'gray',
-     borderWidth: 1,
-     fontFamily: "squeakychalksound",
-     color: '#ffffff',
-     fontSize: 20,
-     paddingLeft: 10
+    borderColor: 'gray',
+    borderWidth: 1,
+    color: '#ffffff',
+    fontFamily: 'squeakychalksound',
+    fontSize: 20,
+    height: 30,
+    paddingLeft: 10,
   },
   inputLabel: {
+    color: '#ffffff',
+    fontFamily: 'squeakychalksound',
     fontSize: 24,
     fontWeight: '600',
-    fontFamily: "squeakychalksound"
   },
   mainTitle: {
     fontSize: 48,
@@ -162,25 +150,31 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   buttonText: {
+    color: '#ffffff',
+    fontFamily: 'squeakychalksound',
     fontSize: 40,
     textAlign: 'center',
-    fontFamily: "squeakychalksound",
-    color: 'white'
-  }
-})
+  },
+});
 
 const mapStateToProps = state => ({
   ...state,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({
-    editPlayer,
-    editRoomCode,
-    addPlayer,
-    assignNetworkId,
-    syncPlayers
-  }, dispatch),
+  actions: bindActionCreators(
+    {
+      editPlayer,
+      editRoomCode,
+      addPlayer,
+      assignNetworkId,
+      syncPlayers,
+    },
+    dispatch,
+  ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NetworkInput)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(NetworkInput);
