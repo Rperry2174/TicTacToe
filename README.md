@@ -14,4 +14,4 @@ Tic Tac Toe
 `node server.js`
 
 # run two simulators at the same time
-https://stackoverflow.com/questions/9352549/getting-how-many-people-are-in-a-chat-room-in-socket-io
+https://stackoverflow.com/questions/38099010/running-multiple-ios-simulators-with-react-native
