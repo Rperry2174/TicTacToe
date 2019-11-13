@@ -62,6 +62,8 @@ class Square extends Component {
       this.completeTurn(newBoard);
     } else if (this.props.game.mode === 2) {
       // Two player networked
+      if (this.props.game.networkId !== this.props.game.playerTurn) return;
+
       const data = {
         newBoard,
         roomCode: this.props.game.roomCode + this.rowIndex + this.colIndex,
