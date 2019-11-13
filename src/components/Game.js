@@ -10,7 +10,6 @@ import Row from './Row';
 class Game extends Component {
   constructor(props) {
     super(props);
-
     this.drawBoard = this.drawBoard.bind(this);
   }
 
@@ -18,7 +17,7 @@ class Game extends Component {
     const rows = this.props.game.matrix.map((colData, i) => {
       return <Row rowIndex={i} cols={colData} key={i} />;
     });
-    return <View> {rows} </View>;
+    return <View>{rows}</View>;
   }
 
   render() {
