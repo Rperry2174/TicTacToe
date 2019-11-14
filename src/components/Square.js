@@ -24,6 +24,8 @@ class Square extends Component {
     this.numberToColor = this.numberToColor.bind(this);
     this.completeTurn = this.completeTurn.bind(this);
     this.onPressSquare = this.onPressSquare.bind(this);
+    this.updateBoard = this.updateBoard.bind(this);
+    this.computerPlayTurn = this.computerPlayTurn.bind(this);
 
     this.socket = io('http://localhost:3005');
     this.socket.on('socketUpdateGameReducer', data => {
@@ -39,6 +41,10 @@ class Square extends Component {
     );
   }
 
+  componentDidMount() {
+    this.interval = setInterval(() => this.computerPlayTurn(), 5000);
+  }
+
   onPressSquare() {
     // Return if that square is taken
     // TODO: Add some kind of feedback (i.e. jiggle square) when clicking a taken square
@@ -46,14 +52,9 @@ class Square extends Component {
       return;
 
     // NOTE: Could maybe be cleaner if switched matrix to {} instead of []
-    const oldBoard = this.props.game.matrix;
-    const newBoard = Object.assign([...oldBoard], {
-      [this.props.rowIndex]: Object.assign([...oldBoard[this.props.rowIndex]], {
-        [this.props.colIndex]: this.props.game.playerTurn,
-      }),
-    });
+    const newBoard = this.updateBoard(this.rowIndex, this.colIndex);
 
-    if (this.props.game.mode === 0) {
+    if (this.props.game.mode === 0 && this.props.game.playerTurn === 0) {
       // Single Player
       // TODO: add in Computer for single player logic
       this.completeTurn(newBoard);
@@ -69,6 +70,44 @@ class Square extends Component {
         roomCode: this.props.game.roomCode + this.rowIndex + this.colIndex,
       };
       this.socket.emit('socketUpdateGameReducer', data);
+    }
+  }
+
+  updateBoard(rowIndex, colIndex) {
+    const oldBoard = this.props.game.matrix;
+    const newBoard = Object.assign([...oldBoard], {
+      [rowIndex]: Object.assign([...oldBoard[rowIndex]], {
+        [colIndex]: this.props.game.playerTurn,
+      }),
+    });
+
+    return newBoard;
+  }
+
+  computerPlayTurn() {
+    console.log("computerPlayTurn is happening....")
+    const board = this.props.game.matrix;
+
+    if (this.props.game.mode === 0 && this.props.game.playerTurn === 1) {
+      console.log("computerPlayTurn: in if statement")
+
+      let squareValue;
+      let newBoard;
+
+      for (let y = 0; y < 3; y++) {
+        for (let x = 0; x < 3; x++) {
+          squareValue = board[x][y];
+
+          if (
+            squareValue === 10 &&
+            x === this.rowIndex &&
+            y === this.colIndex
+          ) {
+            newBoard = this.updateBoard(x, y);
+            this.completeTurn(newBoard);
+          }
+        }
+      }
     }
   }
 

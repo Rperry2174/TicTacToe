@@ -4,8 +4,9 @@ import {StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import NetworkInput from './NetworkInput';
+import OnePlayerInput from './OnePlayerInput';
 import TwoPlayerInput from './TwoPlayerInput';
+import NetworkInput from './NetworkInput';
 
 import {GAME_MODE_OPTIONS} from '../constants';
 import {changeGameState} from '../actions/game';
@@ -27,6 +28,7 @@ class PlayerInput extends Component {
         <Text style={styles.gameModeText}>
           {GAME_MODE_OPTIONS[this.props.game.mode]}
         </Text>
+        {this.props.game.mode === 0 && <OnePlayerInput />}
         {this.props.game.mode === 1 && <TwoPlayerInput />}
         {this.props.game.mode === 2 && <NetworkInput />}
       </View>
