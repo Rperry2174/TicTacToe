@@ -135,9 +135,28 @@ class Square extends Component {
   }
 
   render() {
+    const middleColumn = {
+      borderLeftWidth: 5,
+      borderRightWidth: 5,
+    };
+
+    const middleRow = {
+      borderTopWidth: 5,
+      borderBottomWidth: 5,
+    };
+
+    let borderStyle;
+    if (this.rowIndex === 1 && this.colIndex === 1) {
+      borderStyle = {...middleRow, ...middleColumn};
+    } else if (this.rowIndex === 1) {
+      borderStyle = middleRow;
+    } else if (this.colIndex === 1) {
+      borderStyle = middleColumn;
+    }
+
     return (
       <TouchableWithoutFeedback onPress={this.onPressSquare}>
-        <View style={styles.col}>{this.numberToColor()}</View>
+        <View style={[styles.col, borderStyle]}>{this.numberToColor()}</View>
       </TouchableWithoutFeedback>
     );
   }
@@ -145,8 +164,7 @@ class Square extends Component {
 
 const styles = StyleSheet.create({
   col: {
-    borderColor: '#000000',
-    borderWidth: 5,
+    borderColor: '#ffffff',
     flex: 1,
     height: 100,
     padding: 10,

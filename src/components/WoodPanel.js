@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'blue',
     fontSize: 20,
     justifyContent: 'center',
-    width: '30%',
+    width: '50%',
   },
   playButton: {
     color: '#492e06',
