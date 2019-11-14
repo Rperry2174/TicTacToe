@@ -28,9 +28,16 @@ class Chalkboard extends Component {
 }
 
 const styles = StyleSheet.create({
-  vertical: {
+  backgroundImage: {
+    flex: 1,
     flexDirection: 'column',
     height: '100%',
+    resizeMode: 'stretch',
+    width: '100%',
+  },
+  chalkBoardContainer: {
+    height: '74%',
+    width: '100%',
   },
   childViewPadding: {
     paddingHorizontal: 10,
@@ -51,16 +58,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  chalkBoardContainer: {
-    height: '74%',
-    width: '100%',
-  },
-  backgroundImage: {
-    flex: 1,
+  vertical: {
     flexDirection: 'column',
     height: '100%',
-    resizeMode: 'stretch',
-    width: '100%',
   },
 });
 

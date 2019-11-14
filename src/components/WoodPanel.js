@@ -72,9 +72,17 @@ class WoodPanel extends Component {
 }
 
 const styles = StyleSheet.create({
-  vertical: {
+  backgroundImage: {
+    flex: 1,
     flexDirection: 'column',
     height: '100%',
+    resizeMode: 'stretch',
+    width: '100%',
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    // backgroundColor: 'yellow'
   },
   horizontal: {
     // backgroundColor: 'green'
@@ -87,17 +95,13 @@ const styles = StyleSheet.create({
     height: '15%',
     justifyContent: 'center',
   },
-  backgroundImage: {
-    flex: 1,
-    flexDirection: 'column',
-    height: '100%',
-    resizeMode: 'stretch',
-    width: '100%',
-  },
-  buttonContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    // backgroundColor: 'yellow'
+  playButton: {
+    color: '#492e06',
+    fontFamily: 'WarungKopi',
+    fontSize: 45,
+    textShadowColor: '#7e4f09',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
   },
   pullRight: {
     alignItems: 'center',
@@ -114,14 +118,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '50%',
   },
-  playButton: {
-    color: '#492e06',
-    fontFamily: 'WarungKopi',
-    fontSize: 45,
-    textShadowColor: '#7e4f09',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10,
-  },
   turnText: {
     color: '#492e06',
     fontFamily: 'WarungKopi',
@@ -130,6 +126,10 @@ const styles = StyleSheet.create({
     textShadowColor: '#7e4f09',
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
+  },
+  vertical: {
+    flexDirection: 'column',
+    height: '100%',
   },
 });
 
