@@ -93,6 +93,7 @@ const gameReducer = (state = initialState, action) => {
         players: [],
         gameState: action.payload,
         roomCode: '',
+        moveCount: 0,
       };
     case ASSIGN_NETWORK_ID:
       return {
