@@ -41,7 +41,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("this.props: ", this.props.game.gameState)
     return (
       <>
         <StatusBar barStyle="dark-content" />

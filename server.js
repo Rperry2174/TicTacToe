@@ -1,32 +1,32 @@
-var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+const app = require('express')();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/socketTest.html');
-});
+// app.get('/', function(req, res){
+//   res.sendFile(`${__dirname  }/socketTest.html`);
+// });
 
-io.on('connection', function(socket){
+io.on('connection', function(socket) {
   console.log('a user connected');
-  socket.on('disconnect', function(){
+  socket.on('disconnect', function() {
     console.log('user disconnected');
   });
 
-  socket.on('socketUpdateGameReducer', function(data){
-    let { roomCode } = data;
+  socket.on('socketUpdateGameReducer', function(data) {
+    const {roomCode} = data;
     socket.join(roomCode);
     io.sockets.in(roomCode).emit('socketUpdateGameReducer', data);
-    console.log("socketUpdateGameReducer: ", data)
+    console.log('[SERVER] socketUpdateGameReducer: ', data);
   });
 
   socket.on('syncLobby', function(players) {
-    console.log("[SERVER] syncLobby players: ", players)
+    console.log('[SERVER] syncLobby players: ', players);
     socket.join('lobby');
     io.sockets.in('lobby').emit('syncLobby', players);
   });
 
   socket.on('addPlayerToLobby', function(players) {
-    console.log("[SERVER] addPlayerToLobby players: ", players)
+    console.log('[SERVER] addPlayerToLobby players: ', players);
     socket.join('lobby');
     io.sockets.in('lobby').emit('syncLobby', players);
     io.sockets.in('lobby').emit('addPlayerToLobby', players);
@@ -38,13 +38,12 @@ io.on('connection', function(socket){
   });
 
   socket.on('create', function(room) {
-    console.log("[SERVER] joining room: ", room)
+    console.log('[SERVER] joining room: ', room);
     socket.join(room);
-    io.sockets.in(room).emit('connectToRoom', "You are in room no. " + room);
+    io.sockets.in(room).emit('connectToRoom', `You are in room no. ${room}`);
   });
-
 });
 
-http.listen(3005, function(){
+http.listen(3005, function() {
   console.log('listening on *:3005');
 });
