@@ -12,7 +12,6 @@ import {
   SYNC_PLAYERS,
 } from '../constants';
 
-
 export function addPlayer() {
   return {
     type: ADD_PLAYER,
