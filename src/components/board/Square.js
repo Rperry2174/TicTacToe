@@ -16,6 +16,7 @@ import {
   updateWinningPlayer,
   changeBoard,
   gameOver,
+  increaseMoveCount,
 } from '../../actions/game';
 
 const pieceX = require('../../assets/piece_X.png');
@@ -120,6 +121,7 @@ class Square extends Component {
   completeTurn(newBoard) {
     this.props.actions.changeBoard(newBoard);
     this.props.actions.newTurn(this.props.game.playerTurn);
+    this.props.actions.increaseMoveCount();
     this.props.actions.updateWinningPlayer(newBoard);
   }
 
@@ -195,6 +197,7 @@ const mapDispatchToProps = dispatch => ({
       newTurn,
       updateWinningPlayer,
       gameOver,
+      increaseMoveCount,
     },
     dispatch,
   ),

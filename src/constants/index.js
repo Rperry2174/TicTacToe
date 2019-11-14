@@ -23,3 +23,5 @@ export const ADD_PLAYER = 'ADD_PLAYER';
 export const SYNC_PLAYERS = 'SYNC_PLAYERS';
 
 export const ASSIGN_NETWORK_ID = 'ASSIGN_NETWORK_ID';
+
+export const INCREASE_MOVE_COUNT = 'INCREASE_MOVE_COUNT';

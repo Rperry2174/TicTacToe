@@ -24,11 +24,13 @@ class GameOver extends Component {
 
   render() {
     const {winningPlayerIndex, players} = this.props.game;
+    const winningPlayer =
+      winningPlayerIndex == null ? 'Draw' : players[winningPlayerIndex];
 
     return (
       <View style={styles.vertical}>
         <Text style={styles.winnerText}>Winning Player:</Text>
-        <Text style={styles.winnerName}>{players[winningPlayerIndex]}</Text>
+        <Text style={styles.winnerName}>{winningPlayer}</Text>
         <View style={styles.restartOptions}>
           <TouchableWithoutFeedback onPress={this.restartGame}>
             <Text style={styles.restartButton}>Play Again</Text>

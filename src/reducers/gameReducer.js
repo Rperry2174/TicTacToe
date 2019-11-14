@@ -10,12 +10,14 @@ import {
   EDIT_ROOM_CODE,
   ASSIGN_NETWORK_ID,
   SYNC_PLAYERS,
+  INCREASE_MOVE_COUNT,
 } from '../constants';
 
 const initialState = {
   networkId: null,
   gameState: 'gameModeSelection',
   winningPlayerIndex: null,
+  moveCount: 0,
   players: [],
   mode: 1,
   playerTurn: 0,
@@ -47,6 +49,11 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         players: newPlayers,
+      };
+    case INCREASE_MOVE_COUNT:
+      return {
+        ...state,
+        moveCount: state.moveCount + 1,
       };
     case ADD_PLAYER:
       let newPlayer = state.players;

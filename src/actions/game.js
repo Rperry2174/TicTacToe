@@ -10,6 +10,7 @@ import {
   ADD_PLAYER,
   ASSIGN_NETWORK_ID,
   SYNC_PLAYERS,
+  INCREASE_MOVE_COUNT,
 } from '../constants';
 
 export function addPlayer() {
@@ -61,6 +62,12 @@ export function editRoomCode(roomCode) {
   return {
     type: EDIT_ROOM_CODE,
     payload: roomCode,
+  };
+}
+
+export function increaseMoveCount() {
+  return {
+    type: INCREASE_MOVE_COUNT,
   };
 }
 

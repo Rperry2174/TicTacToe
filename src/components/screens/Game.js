@@ -28,7 +28,15 @@ class Game extends Component {
     );
 
     const gameOver = <GameOver />;
-    return this.props.game.winningPlayerIndex == null ? gameBoard : gameOver;
+
+    if (
+      this.props.game.moveCount !== 9 &&
+      this.props.game.winningPlayerIndex == null
+    ) {
+      return gameBoard;
+    }
+
+    return gameOver;
   }
 }
 
