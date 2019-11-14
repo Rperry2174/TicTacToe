@@ -4,8 +4,8 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {editPlayer, syncPlayers} from '../actions/game';
-import {PIECE_OPTIONS} from '../constants';
+import {editPlayer, syncPlayers} from '../../actions/game';
+import {PIECE_OPTIONS} from '../../constants';
 
 class OnePlayerInput extends Component {
   constructor(props) {

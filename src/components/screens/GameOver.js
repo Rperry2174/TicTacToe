@@ -3,7 +3,8 @@ import {StyleSheet, Text, View, TouchableWithoutFeedback} from 'react-native';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {restartGame} from '../actions/game';
+
+import {restartGame} from '../../actions/game';
 
 class GameOver extends Component {
   constructor(props) {

@@ -4,12 +4,12 @@ import {StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import OnePlayerInput from './OnePlayerInput';
-import TwoPlayerInput from './TwoPlayerInput';
-import NetworkInput from './NetworkInput';
+import OnePlayerInput from '../playerInputs/OnePlayerInput';
+import TwoPlayerInput from '../playerInputs/TwoPlayerInput';
+import NetworkInput from '../playerInputs/NetworkInput';
 
-import {GAME_MODE_OPTIONS} from '../constants';
-import {changeGameState} from '../actions/game';
+import {GAME_MODE_OPTIONS} from '../../constants';
+import {changeGameState} from '../../actions/game';
 
 class PlayerInput extends Component {
   constructor(props) {

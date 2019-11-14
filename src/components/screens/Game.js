@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import GameOver from './GameOver';
-import Row from './Row';
+import Row from '../Row';
 
 class Game extends Component {
   constructor(props) {

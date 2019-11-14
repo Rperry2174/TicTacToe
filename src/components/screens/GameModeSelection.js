@@ -4,8 +4,8 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {GAME_MODE_OPTIONS} from '../constants';
-import {changeGameMode, changeGameState} from '../actions/game';
+import {GAME_MODE_OPTIONS} from '../../constants';
+import {changeGameMode, changeGameState} from '../../actions/game';
 
 class GameModeSelection extends Component {
   constructor(props) {

@@ -18,9 +18,9 @@ import {
   addPlayer,
   assignNetworkId,
   syncPlayers,
-} from '../actions/game';
+} from '../../actions/game';
 
-import {PIECE_OPTIONS} from '../constants';
+import {PIECE_OPTIONS} from '../../constants';
 
 class NetworkInput extends Component {
   constructor(props) {
