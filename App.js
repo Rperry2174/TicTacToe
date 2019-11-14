@@ -28,12 +28,12 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Title from './src/components/Title'
 import Game from './src/components/Game'
 import GameOver from './src/components/GameOver'
 import PlayerInput from './src/components/PlayerInput'
 import Chalkboard from './src/components/Chalkboard'
 import WoodPanel from './src/components/WoodPanel'
+import GameModeSelection from './src/components/GameModeSelection';
 
 class App extends Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class App extends Component {
           <View style={styles.sectionContainer}>
             <View style={styles.vertical}>
               <Chalkboard>
-                {this.props.game.gameState == "title" && <Title /> }
+                {this.props.game.gameState == "title" && <GameModeSelection /> }
                 {this.props.game.gameState == "playerInput" && <PlayerInput /> }
                 {this.props.game.gameState == "game" && <Game /> }
               </Chalkboard>
