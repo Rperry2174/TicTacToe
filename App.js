@@ -48,7 +48,7 @@ class App extends Component {
           <View style={styles.sectionContainer}>
             <View style={styles.vertical}>
               <Chalkboard>
-                {this.props.game.gameState == "title" && <GameModeSelection /> }
+                {this.props.game.gameState == "gameModeSelection" && <GameModeSelection /> }
                 {this.props.game.gameState == "playerInput" && <PlayerInput /> }
                 {this.props.game.gameState == "game" && <Game /> }
               </Chalkboard>

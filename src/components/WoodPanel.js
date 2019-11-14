@@ -27,7 +27,7 @@ class WoodPanel extends Component {
   }
 
   backButtonPress() {
-    this.props.actions.restartGame('title');
+    this.props.actions.restartGame('gameModeSelection');
   }
 
   render() {

@@ -14,7 +14,7 @@ import {
 
 const initialState = {
   networkId: null,
-  gameState: 'title',
+  gameState: 'gameModeSelection',
   winningPlayerIndex: null,
   players: [],
   mode: 1,

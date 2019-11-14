@@ -18,7 +18,7 @@ class GameOver extends Component {
   }
 
   goToTitle() {
-    this.props.actions.restartGame('title');
+    this.props.actions.restartGame('gameModeSelection');
   }
 
   render() {
