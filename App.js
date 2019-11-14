@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, { Component } from 'react'
 import {
   SafeAreaView,
@@ -28,12 +20,13 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Game from './src/components/screens/Game'
-import GameOver from './src/components/screens/GameOver'
-import PlayerInput from './src/components/screens/PlayerInput'
-import Chalkboard from './src/components/Chalkboard'
-import WoodPanel from './src/components/WoodPanel'
-import GameModeSelection from './src/components/GameModeSelection';
+import Game from './src/components/screens/Game';
+import GameModeSelection from './src/components/screens/GameModeSelection';
+import GameOver from './src/components/screens/GameOver';
+import PlayerInput from './src/components/screens/PlayerInput';
+
+import Chalkboard from './src/components/background/Chalkboard';
+import WoodPanel from './src/components/background/WoodPanel';
 
 class App extends Component {
   constructor(props) {

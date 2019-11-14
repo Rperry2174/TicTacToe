@@ -4,8 +4,8 @@ import {StyleSheet, View, Text, ImageBackground} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-const greyBrickWall = require('../assets/greyBrickWall.png');
-const chalkBoard = require('../assets/chalkboard.png');
+const greyBrickWall = require('../../assets/greyBrickWall.png');
+const chalkBoard = require('../../assets/chalkboard.png');
 
 class Chalkboard extends Component {
   render() {

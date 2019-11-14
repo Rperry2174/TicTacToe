@@ -10,9 +10,9 @@ import {
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {changeGameState, restartGame} from '../actions/game';
+import {changeGameState, restartGame} from '../../actions/game';
 
-const woodPanelBackground = require('../assets/woodPanel.jpg');
+const woodPanelBackground = require('../../assets/woodPanel.jpg');
 
 class WoodPanel extends Component {
   constructor(props) {

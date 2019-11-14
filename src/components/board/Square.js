@@ -16,10 +16,10 @@ import {
   updateWinningPlayer,
   changeBoard,
   gameOver,
-} from '../actions/game';
+} from '../../actions/game';
 
-const pieceX = require('../assets/piece_X.png');
-const pieceO = require('../assets/piece_O.png');
+const pieceX = require('../../assets/piece_X.png');
+const pieceO = require('../../assets/piece_O.png');
 
 class Square extends Component {
   constructor(props) {

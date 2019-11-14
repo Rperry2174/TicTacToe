@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 
 import Square from './Square';
 
-import {changeBoard} from '../actions/game';
+import {changeBoard} from '../../actions/game';
 
 class Row extends Component {
   constructor(props) {
