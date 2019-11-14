@@ -85,12 +85,9 @@ class Square extends Component {
   }
 
   computerPlayTurn() {
-    console.log("computerPlayTurn is happening....")
     const board = this.props.game.matrix;
 
     if (this.props.game.mode === 0 && this.props.game.playerTurn === 1) {
-      console.log("computerPlayTurn: in if statement")
-
       let squareValue;
       let newBoard;
 
