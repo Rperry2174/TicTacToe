@@ -5,6 +5,7 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  YellowBox,
 } from 'react-native';
 
 import {bindActionCreators} from 'redux';
@@ -52,6 +53,12 @@ class NetworkInput extends Component {
         this.props.actions.assignNetworkId(players.length - 1);
       }
     });
+  }
+
+  componentDidMount() {
+    YellowBox.ignoreWarnings([
+      'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?',
+    ]);
   }
 
   onChangeRoomCode(roomCode) {

@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, TouchableWithoutFeedback, View, Image} from 'react-native';
+import {
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+  Image,
+  YellowBox,
+} from 'react-native';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -42,6 +48,9 @@ class Square extends Component {
   }
 
   componentDidMount() {
+    YellowBox.ignoreWarnings([
+      'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?',
+    ]);
     this.interval = setInterval(() => this.computerPlayTurn(), 5000);
   }
 
