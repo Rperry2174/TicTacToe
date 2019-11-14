@@ -42,7 +42,7 @@ class WoodPanel extends Component {
       <View style={styles.buttonContainer}>
         <View style={styles.pullLeft}>
           <TouchableWithoutFeedback onPress={this.backButtonPress}>
-            <Text style={styles.playButton}>Back</Text>
+            <Text style={styles.playButton}>BACK</Text>
           </TouchableWithoutFeedback>
         </View>
         <View style={styles.pullRight}>
@@ -112,10 +112,11 @@ const styles = StyleSheet.create({
     width: '30%',
   },
   pullLeft: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     // backgroundColor: 'blue',
     fontSize: 20,
     justifyContent: 'center',
+    paddingLeft: 10,
     width: '50%',
   },
   turnText: {
