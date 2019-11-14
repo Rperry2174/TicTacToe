@@ -12,6 +12,21 @@ import {
   SYNC_PLAYERS,
 } from '../constants';
 
+
+export function addPlayer() {
+  return {
+    type: ADD_PLAYER,
+    payload: '',
+  };
+}
+
+export function assignNetworkId(networkId) {
+  return {
+    type: ASSIGN_NETWORK_ID,
+    payload: networkId,
+  };
+}
+
 export function changeBoard(board) {
   return {
     type: BOARD_CHANGE,
@@ -22,13 +37,6 @@ export function changeBoard(board) {
 export function changeGameMode(mode) {
   return {
     type: GAME_MODE_CHANGE,
-    payload: mode,
-  };
-}
-
-export function restartGame(mode) {
-  return {
-    type: RESTART_GAME,
     payload: mode,
   };
 }
@@ -50,27 +58,6 @@ export function editPlayer(playerIndex, playerName) {
   };
 }
 
-export function addPlayer() {
-  return {
-    type: ADD_PLAYER,
-    payload: '',
-  };
-}
-
-export function syncPlayers(players) {
-  return {
-    type: SYNC_PLAYERS,
-    payload: players,
-  };
-}
-
-export function assignNetworkId(networkId) {
-  return {
-    type: ASSIGN_NETWORK_ID,
-    payload: networkId,
-  };
-}
-
 export function editRoomCode(roomCode) {
   return {
     type: EDIT_ROOM_CODE,
@@ -79,11 +66,24 @@ export function editRoomCode(roomCode) {
 }
 
 export function newTurn(playerIndex) {
-  // Toggle back and forth between 0 and 1
   const newPlayerIndex = playerIndex === 0 ? 1 : 0;
   return {
     type: NEW_TURN,
     payload: newPlayerIndex,
+  };
+}
+
+export function restartGame(mode) {
+  return {
+    type: RESTART_GAME,
+    payload: mode,
+  };
+}
+
+export function syncPlayers(players) {
+  return {
+    type: SYNC_PLAYERS,
+    payload: players,
   };
 }
 
@@ -129,7 +129,6 @@ export function updateWinningPlayer(matrix) {
 
   const winningPlayerValues = [];
   [rowSums, columnSums, diagonalSums].forEach(direction => {
-    console.log('direction: ', direction);
     Object.values(direction).forEach(values => {
       winningPlayerValues.push(values);
     });

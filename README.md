@@ -19,7 +19,7 @@ https://stackoverflow.com/questions/38099010/running-multiple-ios-simulators-wit
 cd /Applications/Xcode.app/Contents/Developer/Applications
 open -n Simulator.app
 # Click "Ok" when you get "Unable to boot device in current state"
-# Change simulator to be different than first simulator (e.g. Hardware -> Device -> iPhone 6s)
+# Change simulator to be different than first simulator (e.g. Hardware -> Device -> iPhone XS)
 cd <react-native project>
 npx react-native run-ios --simulator "iPhone XS"
 ```
