@@ -1,6 +1,10 @@
 # TicTacToe
 Tic Tac Toe
 
+Click to watch demo video
+[![Watch the video](https://ryaperry-bucket.s3-us-west-2.amazonaws.com/tictactoe_screenshot.png)](https://www.youtube.com/watch?v=7Xofq5Siwck)
+
+
 # Run locally
 `npx react-native run-ios`
 
